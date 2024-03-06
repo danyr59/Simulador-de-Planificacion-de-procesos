@@ -1,1 +1,1 @@
-# Simulador-de-Planificaci-n-de-Procesos
+# Simulador de Planificacion de procesos
