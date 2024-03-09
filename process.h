@@ -1,5 +1,6 @@
 #ifndef __PROCESS__
 #define __PROCESS__
+#include "utils.h"
 
 class Process
 {
@@ -10,8 +11,9 @@ public:
     unsigned burst_time;
     unsigned io_burst_time;
     unsigned priority;
+    unsigned arrival_time;
 
-    Process(/* args */);
+    Process(unsigned _pid, unsigned _arrival_time);
     ~Process();
 
 };
