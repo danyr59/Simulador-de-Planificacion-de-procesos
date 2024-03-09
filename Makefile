@@ -1,5 +1,5 @@
 CCFLAGS = -Wall -g
-CXX = clang++11 -std=c++17
+CXX = clang++11 -std=c++17 -lpthread
 
 main: main.o process.o 
 	$(CC) main.o process.o -o main  
