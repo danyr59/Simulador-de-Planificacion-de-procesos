@@ -4,11 +4,16 @@
 class Process
 {
 private:
+
+public:
     unsigned pid;
     unsigned burst_time;
-public:
+    unsigned io_burst_time;
+    unsigned priority;
+
     Process(/* args */);
     ~Process();
+
 };
 
 #endif
