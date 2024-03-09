@@ -1,3 +1,6 @@
+#ifndef __PROCESS__
+#define __PROCESS__
+
 class Process
 {
 private:
@@ -7,3 +10,5 @@ public:
     Process(/* args */);
     ~Process();
 };
+
+#endif
