@@ -1,12 +1,24 @@
 #ifndef __FCFS__
 #define __FCFS__
-#include <vector>
+#include <queue>
 #include "process.h"
 
-class Fcfs
+
+class Fcfs 
 {
-    std::vector<Process> process_list;
+    public:
+    std::queue<Process> process_queue;
+
+
+    Fcfs(int num_process);
+    //funcion para sacar metricas
+
+    //ejecucion de algoritmo
+    void execute(); 
 };
+
+
+
 
 
 #endif

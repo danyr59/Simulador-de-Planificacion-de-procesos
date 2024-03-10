@@ -1,14 +1,12 @@
 CCFLAGS = -Wall -g
 CXX = g++ -std=c++17 -lpthread
 
-main: main.cpp process.o
-	$(CXX) main.cpp process.o -o main  
+main: utils.o process.o cpu.o fcfs.o
+	$(CXX) main.cpp *.o -o main  
   
-process.o: process.cpp
-	$(CXX) process.cpp -c $(CCFLAGS)
+%.o: %.cpp
+	$(CXX) -c $< -o $@
 
-cpu.o: cpu.cpp process.o
-	$(CXX) cpu.cpp -c $(CCFLAGS)
 
 .PHONY: clean 
 clean: 
