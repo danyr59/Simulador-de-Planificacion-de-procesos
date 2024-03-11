@@ -2,15 +2,24 @@
 #define __CPU__
 #include "process.h"
 
-class cpu
+class Cpu
 {
 private:
     unsigned tick;
+    unsigned quantum;
+    std::chrono::_V2::system_clock::time_point start_time;
     
 public:
-    cpu(/* args */);
+    unsigned num_ticks;
+    Cpu(unsigned _tick, unsigned _quantum);
+
+    bool processing(Process p );
     
-    ~cpu();
+    
+    ~Cpu();
+    
+
+
 };
 
 #endif

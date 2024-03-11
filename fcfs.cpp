@@ -2,41 +2,60 @@
 
 Fcfs::Fcfs(int num_process)
 {
-    for(int i = 0; i < num_process; i++)
+    //aladur oircesiss
+    process_list.push_back(Process(1, 0, 3));
+    process_list.push_back(Process(2, 1, 5));
+    process_list.push_back(Process(4, 9, 5));
+    process_list.push_back(Process(3, 4, 2));
+    process_list.push_back(Process(5, 12, 5));
+
+    //ordenar procesos por tiempo de llegada
+    std::sort(process_list.begin(), process_list.end(),[&](Process a,Process b){
+        return a.arrival_time < b.arrival_time;
+    });
+    
+    // for(int i = 0; i < num_process; i++)
+    // {
+    //     this->process_queue.push(Process(i, i));
+    // }
+}
+
+bool Fcfs::is_done()
+{
+    for(auto p : process_list)
     {
-        this->process_queue.push(Process(i, i));
+        if(p.status != STATES::READY)
+            return false;
     }
+    return true;
 }
 
 void Fcfs::execute()
 {   
-   // Tiempo original (inicio)
-    auto tiempoOriginal = std::chrono::high_resolution_clock::now();
 
-    // Duración total deseada (2 minutos = 120,000 ms)
-    std::chrono::milliseconds duracionTotal(120000);
+    Cpu _cpu(2, 0); 
 
-    // Iterar mientras no se alcance la duración total
-    while (true) {
-        // Calcular el tiempo transcurrido desde el inicio
-        auto tiempoActual = std::chrono::high_resolution_clock::now();
-        auto tiempoTranscurrido = std::chrono::duration_cast<std::chrono::milliseconds>(tiempoActual - tiempoOriginal);
 
-        // Verificar si se alcanzó la duración total
-        if (tiempoTranscurrido >= duracionTotal) {
-            break; // Salir del bucle
+    while (true ) {
+        for(auto p : process_list)
+        {
+            if(p.status == STATES::DONE)
+                continue;
+
+            if(_cpu.num_ticks == p.arrival_time){
+                process_queue.push(p);
+                break;
+            }
         }
 
-        // Realizar alguna acción en cada paso de tiempo
-        std::cout << "Tiempo transcurrido: " << tiempoTranscurrido.count() << " ms" << std::endl;
+        //Process ´pro.pop();
+        
+        
+        //dormir la execucion un tick;
+        //_cpu.processing();
 
-        // Esperar un tiempo específico (por ejemplo, 1000 ms = 1 segundo)
-        std::this_thread::sleep_for(std::chrono::milliseconds(1000));
+       
     }
-
-    std::cout << "Tiempo total alcanzado. Fin de la simulación." << std::endl;
-
-    
 
 
 }
