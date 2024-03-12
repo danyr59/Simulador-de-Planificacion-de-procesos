@@ -10,11 +10,12 @@
 class Fcfs 
 {
     public:
-    std::queue<Process> process_queue;
-    std::vector<Process> process_list;
+    std::queue<sProcess> process_queue;
+    std::vector<sProcess> process_list;
 
 
     Fcfs(int num_process);
+
     //funcion para sacar metricas
 
     //ejecucion de algoritmo

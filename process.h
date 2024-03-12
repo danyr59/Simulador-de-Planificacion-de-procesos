@@ -24,6 +24,7 @@ public:
     Process(unsigned _pid, unsigned _arrival_time);
     Process(unsigned _pid, unsigned _arrival_time, unsigned _burst_time);
     ~Process();
+
 };
 
 #endif

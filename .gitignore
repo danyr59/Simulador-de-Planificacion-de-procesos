@@ -1,0 +1,14 @@
+# Ignore compiled object files
+*.o
+*.ko
+*.obj
+*.elf
+
+# Ignore executables
+*.exe
+*.out
+*.app
+
+#Ignore vscode
+
+.vscode
