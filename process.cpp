@@ -33,7 +33,7 @@ void Process::io()
 void Process::generate_block_point()
 {
     int probability = generateRandomNum(0, 5);
-    if (probability = 1)
+    if (probability == 1)
     {
         this->block_point = generateRandomNum(0, burst_time);
         this->io_burst_time = generateRandomNum(0, 10);
