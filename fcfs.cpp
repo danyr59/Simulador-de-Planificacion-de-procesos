@@ -39,21 +39,25 @@ void Fcfs::execute()
 
         for (auto p : process_list)
         {
-            p->io();
-
             if (p->status == STATES::DONE)
                 continue;
 
             if (cpu.num_ticks == p->arrival_time)
             {
                 process_queue.push(p);
-                //break;
+                break;
             }
         }
 
         if(!bloqued_process_queue.empty())
         {
+            for (auto p : process_list)
+            {
+                p->io();
+            }
+
             if(bloqued_process_queue.front()->io_burst_time == 0){
+                bloqued_process_queue.front()->generate_block_point();
                 process_queue.push(bloqued_process_queue.front());
                 bloqued_process_queue.pop();
             }

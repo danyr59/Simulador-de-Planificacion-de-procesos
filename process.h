@@ -27,6 +27,7 @@ public:
     ~Process();
 
     void io();
+    void generate_block_point();
 
 };
 

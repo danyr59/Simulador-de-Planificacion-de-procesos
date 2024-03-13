@@ -24,14 +24,6 @@ STATES Cpu::processing()
 
     --current->burst_time;
 
-    ///ocurre evento bloqueante
-    if(current->burst_time == current->block_point)
-    {
-        current->status = STATES::BLOCKED;
-        return STATES::BLOCKED;
-    }
-    
-
     //p.io_burst_time;
     if(current->burst_time == 0)
     {
@@ -41,6 +33,12 @@ STATES Cpu::processing()
         return STATES::DONE;
     }
 
+    ///ocurre evento bloqueante
+    if(current->burst_time == current->block_point)
+    {
+        current->status = STATES::BLOCKED;
+        return STATES::BLOCKED;
+    }
     
 
     return STATES::EXECUTE;
