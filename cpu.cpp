@@ -14,25 +14,36 @@ Cpu::~Cpu()
 {
 }
 
-bool Cpu::processing()
+STATES Cpu::processing()
 {
     std::this_thread::sleep_for(std::chrono::milliseconds(this->tick));
     //procesamiento nulo
+    ++num_ticks;
     if(free || current == nullptr)
-        return false;
+        return STATES::EXECUTE;
 
     --current->burst_time;
-    ++num_ticks;
+
+    ///ocurre evento bloqueante
+    if(current->burst_time == current->block_point)
+    {
+        current->status = STATES::BLOCKED;
+        return STATES::BLOCKED;
+    }
+    
+
     //p.io_burst_time;
     if(current->burst_time == 0)
     {
         free = true;
         current->status = STATES::DONE;
         current = nullptr;
-        return true;
+        return STATES::DONE;
     }
 
-    return false;
+    
+
+    return STATES::EXECUTE;
 }
 
 bool Cpu::is_free()
@@ -43,6 +54,8 @@ bool Cpu::is_free()
 sProcess Cpu::interrupt()
 {
     free = true;
+    if(current->status ==  STATES::EXECUTE)
+        current->status = STATES::READY;
     return current;
 }
 
@@ -52,6 +65,7 @@ bool Cpu::assign_process(sProcess p)
         return false;
 
     current = p;
+    current->status = STATES::EXECUTE;
     free = false;
 
     return true;

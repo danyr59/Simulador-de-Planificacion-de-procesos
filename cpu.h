@@ -21,7 +21,7 @@ public:
     ~Cpu();
 
     //funciones
-    bool processing();
+    STATES processing();
     bool is_free();
     sProcess interrupt();
     bool assign_process(sProcess p);
