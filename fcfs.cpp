@@ -79,7 +79,9 @@ void Fcfs::execute()
             if (is_done())
                 break;
         }
+       
 
+       std::cout << 4 << std::endl;
         
     }
 }
