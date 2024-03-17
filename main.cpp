@@ -2,6 +2,7 @@
 #include "process.h"
 #include "fcfs.h"
 #include "SJF.h"
+#include "npps.h"
 #include "random_selection.h"
 
 int main()
@@ -13,6 +14,8 @@ int main()
     //sjf.execute();
     RandomSelection randomselection(7);
     randomselection.execute();
+    NPPS npps(10);
+    npps.execute();
     
     return 0;
 }
