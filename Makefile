@@ -1,7 +1,7 @@
 CCFLAGS = -Wall -g
 CXX = g++ -std=c++17 -lpthread
 
-main: utils.o process.o cpu.o fcfs.o SJF.o
+main: utils.o process.o cpu.o fcfs.o SJF.o random_selection.o
 	$(CXX) $(CCFLAGS) main.cpp *.o -o main.out
   
 %.o: %.cpp
