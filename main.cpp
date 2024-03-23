@@ -3,6 +3,7 @@
 #include "fcfs.h"
 #include "SJF.h"
 #include "npps.h"
+#include "ps.h"
 #include "random_selection.h"
 
 int main()
@@ -16,6 +17,8 @@ int main()
     randomselection.execute();
     NPPS npps(10);
     npps.execute();
+    PS ps(10);
+    ps.execute();
     
     return 0;
 }
