@@ -4,6 +4,7 @@
 #include "SJF.h"
 #include "npps.h"
 #include "random_selection.h"
+#include "RR.h"
 
 int main()
 {
@@ -16,6 +17,8 @@ int main()
     randomselection.execute();
     NPPS npps(10);
     npps.execute();
+    RR rr;
+    rr.execute();
     
     return 0;
 }

@@ -25,6 +25,9 @@ public:
     bool is_free();
     sProcess interrupt();
     bool assign_process(sProcess p);
+    unsigned getQuantum() const{
+        return this->quantum;
+    }
     
 
 
