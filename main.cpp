@@ -3,6 +3,7 @@
 #include "fcfs.h"
 #include "SJF.h"
 #include "npps.h"
+#include "ps.h"
 #include "random_selection.h"
 #include "RR.h"
 
@@ -19,6 +20,8 @@ int main()
     npps.execute();
     RR rr;
     rr.execute();
+    PS ps(10);
+    ps.execute();
     
     return 0;
 }

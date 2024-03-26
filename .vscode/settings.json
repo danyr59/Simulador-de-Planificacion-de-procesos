@@ -61,6 +61,9 @@
         "cinttypes": "cpp",
         "typeinfo": "cpp",
         "variant": "cpp",
-        "queue": "cpp"
+        "queue": "cpp",
+        "codecvt": "cpp",
+        "source_location": "cpp",
+        "iomanip": "cpp"
     }
 }

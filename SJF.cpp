@@ -77,7 +77,7 @@ void SJF::execute()
                 break;
         }
 
-        std::cout << 4 << std::endl;
+       
     }
 }
 
