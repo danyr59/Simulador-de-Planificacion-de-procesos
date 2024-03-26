@@ -28,6 +28,9 @@ public:
     unsigned getQuantum() const{
         return this->quantum;
     }
+    sProcess getCurrentProcess() const {
+        return this->current;
+    }
     
 
 

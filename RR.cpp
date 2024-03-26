@@ -30,6 +30,7 @@ void RR::execute()
     unsigned time = 0;
     bool add_process_interrup = false;
 
+
     while (true)
     {
 
@@ -51,11 +52,7 @@ void RR::execute()
         {
             process_queue.push(cpu.interrupt());
             time = 0;
-            if (cpu.is_free() && !process_queue.empty())
-            {
-                if (cpu.assign_process(process_queue.front()))
-                    process_queue.pop();
-            }
+            
             add_process_interrup = false;
         }
 
@@ -79,7 +76,7 @@ void RR::execute()
             if (cpu.assign_process(process_queue.front()))
                 process_queue.pop();
         }
-
+        auto current = cpu.getCurrentProcess();
         STATES state = cpu.processing();
 
         if (state == STATES::BLOCKED)
@@ -90,6 +87,10 @@ void RR::execute()
         {
             if (is_done())
                 break;
+                //para metricas mostrar el current(variable local)
+                //ya que el cpu en este momento no apunta a nada 
+            
+
         }
         else if (state == STATES::EXECUTE)
         {
