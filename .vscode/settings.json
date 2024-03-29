@@ -64,6 +64,7 @@
         "queue": "cpp",
         "codecvt": "cpp",
         "source_location": "cpp",
-        "iomanip": "cpp"
+        "iomanip": "cpp",
+        "format": "cpp"
     }
 }

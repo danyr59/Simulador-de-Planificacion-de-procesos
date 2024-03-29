@@ -1,7 +1,11 @@
 #ifndef MAINWINDOW_H
 #define MAINWINDOW_H
-
+#include <string>
 #include <QMainWindow>
+#include <QLabel>
+#include <QPushButton>
+
+#include "utils.h"
 
 QT_BEGIN_NAMESPACE
 namespace Ui {
@@ -17,7 +21,13 @@ public:
     MainWindow(QWidget *parent = nullptr);
     ~MainWindow();
 
+private slots:
+    void on_pushButton_clicked();
+
 private:
     Ui::MainWindow *ui;
+    int contador;
+    QLabel *label;
+    QPushButton *button;
 };
 #endif // MAINWINDOW_H
