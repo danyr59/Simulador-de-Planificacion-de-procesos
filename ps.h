@@ -7,6 +7,7 @@
 #include "base.h"
 #include "process.h"
 #include "cpu.h"
+#include "utils.h"
 //Non Preemptive Priority Scheduling
 
 class PS: public Base

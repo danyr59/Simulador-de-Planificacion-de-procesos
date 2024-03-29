@@ -6,6 +6,8 @@
 #include <chrono>
 #include <thread>
 
+typedef unsigned short int ushort;
+
 unsigned generateRandomNum(int min, int max);
 
 void sleep(unsigned time);
