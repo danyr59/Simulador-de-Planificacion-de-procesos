@@ -17,3 +17,5 @@ CMakeLists.txt.user
 
 #carpeta
 /build
+/CMakeFiles
+.qt
