@@ -4,7 +4,6 @@
 #include <QMainWindow>
 #include <QLabel>
 #include <QPushButton>
-
 #include "utils.h"
 
 QT_BEGIN_NAMESPACE

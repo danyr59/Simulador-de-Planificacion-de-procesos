@@ -22,6 +22,13 @@ MainWindow::~MainWindow()
 void MainWindow::on_pushButton_clicked()
 {
     std::cout << "button precionado" << std::endl;
-    this->close();
+
+    label->setText("Botton precionado numero " + QString::number(contador));
+    if(contador == 4)
+        button->setText("Cerrrar ventana");
+
+    if(contador == 5)
+        this->close();
+    ++contador;
 }
 
