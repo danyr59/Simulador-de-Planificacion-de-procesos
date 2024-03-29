@@ -1,4 +1,4 @@
-#include <iostream>
+#include "mainwindow.h"
 #include "process.h"
 #include "fcfs.h"
 #include "SJF.h"
@@ -7,10 +7,12 @@
 #include "random_selection.h"
 #include "RR.h"
 
-int main()
+#include <QApplication>
+
+int main(int argc, char *argv[])
 {
     //std::cout << "hola";
-    //Fcfs fcfs(8); 
+    //Fcfs fcfs(8);
     //fcfs.execute();
     //SJF sjf(7);
     //sjf.execute();
@@ -22,6 +24,8 @@ int main()
     rr.execute();
     PS ps(10);
     ps.execute();
-    
-    return 0;
+    QApplication a(argc, argv);
+    MainWindow w;
+    w.show();
+    return a.exec();
 }

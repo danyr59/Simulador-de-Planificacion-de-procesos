@@ -12,3 +12,8 @@
 #Ignore vscode
 
 .vscode
+
+CMakeLists.txt.user
+
+#carpeta
+/build
