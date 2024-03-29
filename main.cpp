@@ -1,4 +1,4 @@
-#include "mainwindow.h"
+// #include "mainwindow.h"
 #include "process.h"
 #include "fcfs.h"
 #include "SJF.h"
@@ -7,7 +7,7 @@
 #include "random_selection.h"
 #include "RR.h"
 
-#include <QApplication>
+//#include <QApplication>
 
 int main(int argc, char *argv[])
 {
@@ -24,8 +24,8 @@ int main(int argc, char *argv[])
     rr.execute();
     PS ps(10);
     ps.execute();
-    QApplication a(argc, argv);
-    MainWindow w;
-    w.show();
-    return a.exec();
+    //QApplication a(argc, argv);
+    //MainWindow w;
+    //w.show();
+    return 0;//a.exec();
 }
