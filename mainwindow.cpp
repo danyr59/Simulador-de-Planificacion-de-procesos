@@ -6,10 +6,13 @@ MainWindow::MainWindow(QWidget *parent)
     : QMainWindow(parent)
     , ui(new Ui::MainWindow)
 {
+
     ui->setupUi(this);
     contador = 0;
     label = this->findChild<QLabel*>("label");
     button = this->findChild<QPushButton*>("pushButton");
+    connect(ui->bottom2, SIGNAL(clicked()), this, SLOT(on_pushButton_clicked()));
+
 }
 
 MainWindow::~MainWindow()
