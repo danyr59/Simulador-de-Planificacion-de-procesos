@@ -8,6 +8,7 @@ Process::Process(unsigned _pid, unsigned _arrival_time)
     this->pid = _pid;
     this->arrival_time = _arrival_time;
     generate_block_point();
+    this->status = STATES::NONE;
 }
 Process::Process(unsigned _pid, unsigned _arrival_time, unsigned _burst_time)
 {
@@ -17,6 +18,7 @@ Process::Process(unsigned _pid, unsigned _arrival_time, unsigned _burst_time)
     this->pid = _pid;
     this->arrival_time = _arrival_time;
     generate_block_point();
+    this->status = STATES::NONE;
 }
 
 Process::~Process()

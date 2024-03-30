@@ -1,22 +1,7 @@
 #include "fcfs.h"
 
-Fcfs::Fcfs(int num_process) : bloqued_process_queue()
+Fcfs::Fcfs(int num_process) : bloqued_process_queue(), Base(num_process)
 {
-    // aladur oircesiss
-    process_list.push_back(std::make_shared<Process>(Process(1, 0, 3)));
-    process_list.push_back(std::make_shared<Process>(Process(2, 1, 5)));
-    process_list.push_back(std::make_shared<Process>(Process(4, 9, 5)));
-    process_list.push_back(std::make_shared<Process>(Process(3, 4, 2)));
-    process_list.push_back(std::make_shared<Process>(Process(5, 12, 5)));
-
-    // ordenar procesos por tiempo de llegada
-    std::sort(process_list.begin(), process_list.end(), [&](sProcess a, sProcess b)
-              { return a->arrival_time < b->arrival_time; });
-
-    // for(int i = 0; i < num_process; i++)
-    // {
-    //     this->process_queue.push(Process(i, i));
-    // }
 }
 
 bool Fcfs::is_done()
@@ -44,8 +29,9 @@ void Fcfs::execute()
 
             if (cpu.num_ticks == p->arrival_time)
             {
+                p->status = STATES::READY;
                 process_queue.push(p);
-                break;
+                
             }
         }
 
@@ -71,6 +57,7 @@ void Fcfs::execute()
 
         STATES state = cpu.processing();
 
+
         if (state == STATES::BLOCKED)
         {
             bloqued_process_queue.push(cpu.interrupt());
@@ -79,9 +66,8 @@ void Fcfs::execute()
             if (is_done())
                 break;
         }
-       
 
-       std::cout << 4 << std::endl;
+        sendData(cpu.is_free(), cpu.num_ticks);
         
     }
 }

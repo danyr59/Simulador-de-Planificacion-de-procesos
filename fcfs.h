@@ -5,9 +5,10 @@
 #include <algorithm>
 #include "process.h"
 #include "cpu.h"
+#include "base.h"
 
 
-class Fcfs 
+class Fcfs: public Base
 {
     public:
     std::queue<sProcess> process_queue;

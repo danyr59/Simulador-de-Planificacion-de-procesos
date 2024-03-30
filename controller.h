@@ -14,20 +14,7 @@ public:
         void datosListos(const QString &datos);
 
     protected:
-        void run() override{
-            //ejecuccion de cada algoritmo
-            //obtener metricas
-            //exponer metricas
-            for (size_t i = 0; i < 5; i++)
-            {
-                
-                emit datosListos("dato " + QString::number(i));
-                QThread::sleep(1);
-                
-            }
-            
-
-        }
+        void run() override;
 
 
     

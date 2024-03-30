@@ -1,13 +1,6 @@
 #ifndef __PROCESS__
 #define __PROCESS__
 #include "utils.h"
-enum STATES
-{
-    READY,
-    BLOCKED,
-    EXECUTE,
-    DONE
-};
 
 class Process
 {

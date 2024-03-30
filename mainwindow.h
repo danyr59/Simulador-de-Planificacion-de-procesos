@@ -1,12 +1,14 @@
 #ifndef MAINWINDOW_H
 #define MAINWINDOW_H
+#include <iostream>
+
 #include <string>
 #include <QMainWindow>
 #include <QLabel>
 #include <QPushButton>
+#include <QMessageBox>
 #include "utils.h"
 #include "controller.h"
-#include "utils.h"
 
 QT_BEGIN_NAMESPACE
 namespace Ui
@@ -32,7 +34,9 @@ private slots:
 
 private:
     Ui::MainWindow *ui;
-    int contador;
     Controller *controller;
+
+    //funtions
+    void Message(QString);
 };
 #endif // MAINWINDOW_H
