@@ -26,7 +26,5 @@ private slots:
 private:
     Ui::MainWindow *ui;
     int contador;
-    QLabel *label;
-    QPushButton *button;
 };
 #endif // MAINWINDOW_H
