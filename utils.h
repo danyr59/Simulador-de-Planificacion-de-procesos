@@ -7,6 +7,7 @@
 #include <thread>
 
 enum ALGORITMO {
+    NONE,
     FCFS,
     SJF,
     SA,

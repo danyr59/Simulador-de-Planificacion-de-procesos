@@ -27,7 +27,9 @@ void MainWindow::on_pushButton_clicked()
 {
     //verificar que antes de presionar el botom tener datos 
     //de lo contrario mostrar mensaje
-    std::cout << "button precionado" << std::endl;
+    std::cout << "algoritmo: " << ui->algorithm_select->currentIndex() << std::endl;
+    std::cout << "numero de procesos: " << ui->process_number->value() << std::endl;
+    std::cout << "numero de tick: " << ui->tick_number->value() << std::endl;
     //controller->start();
 }
 
@@ -38,7 +40,12 @@ void MainWindow::on_algorithm_select_currentIndexChanged(int index)
 
     if(index == 1)
     {
-
+        ui->label_4->hide();
+        ui->quantum->hide();
+    }else
+    {
+        ui->label_4->show();
+        ui->quantum->show();
     }
     
     std::cout << index << std::endl;
