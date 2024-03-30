@@ -24,14 +24,14 @@
      </rect>
     </property>
     <property name="text">
-     <string>Prueba</string>
+     <string>Iniciar</string>
     </property>
    </widget>
-   <widget class="QLabel" name="label">
+   <widget class="QLabel" name="output_label">
     <property name="geometry">
      <rect>
-      <x>250</x>
-      <y>20</y>
+      <x>290</x>
+      <y>250</y>
       <width>221</width>
       <height>20</height>
      </rect>
@@ -39,6 +39,130 @@
     <property name="text">
      <string>TextLabel</string>
     </property>
+   </widget>
+   <widget class="QWidget" name="">
+    <property name="geometry">
+     <rect>
+      <x>560</x>
+      <y>20</y>
+      <width>91</width>
+      <height>58</height>
+     </rect>
+    </property>
+    <layout class="QVBoxLayout" name="quantum_layout">
+     <item>
+      <widget class="QLabel" name="label_4">
+       <property name="text">
+        <string>Quantum</string>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QSpinBox" name="quantum"/>
+     </item>
+    </layout>
+   </widget>
+   <widget class="QWidget" name="">
+    <property name="geometry">
+     <rect>
+      <x>430</x>
+      <y>20</y>
+      <width>101</width>
+      <height>58</height>
+     </rect>
+    </property>
+    <layout class="QVBoxLayout" name="verticalLayout_2">
+     <item>
+      <widget class="QLabel" name="label">
+       <property name="text">
+        <string>Tick</string>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QSpinBox" name="tick_number"/>
+     </item>
+    </layout>
+   </widget>
+   <widget class="QWidget" name="">
+    <property name="geometry">
+     <rect>
+      <x>260</x>
+      <y>20</y>
+      <width>130</width>
+      <height>58</height>
+     </rect>
+    </property>
+    <layout class="QVBoxLayout" name="verticalLayout_3">
+     <item>
+      <widget class="QLabel" name="label_3">
+       <property name="text">
+        <string>Numero de procesos</string>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QSpinBox" name="process_number"/>
+     </item>
+    </layout>
+   </widget>
+   <widget class="QWidget" name="">
+    <property name="geometry">
+     <rect>
+      <x>20</x>
+      <y>20</y>
+      <width>201</width>
+      <height>58</height>
+     </rect>
+    </property>
+    <layout class="QVBoxLayout" name="verticalLayout_4">
+     <item>
+      <widget class="QLabel" name="label_2">
+       <property name="text">
+        <string>Selecciona algoritmo</string>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QComboBox" name="algorithm_select">
+       <item>
+        <property name="text">
+         <string>Seleccionar</string>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>FCFS</string>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>SJF</string>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>Seleccion aleatoria</string>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>basada en prioridades no expulsivo</string>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>Round Robin</string>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>SRTF</string>
+        </property>
+       </item>
+      </widget>
+     </item>
+    </layout>
    </widget>
   </widget>
   <widget class="QMenuBar" name="menubar">
@@ -62,12 +186,12 @@
   <widget class="QStatusBar" name="statusbar"/>
   <action name="actionprueba1">
    <property name="text">
-    <string>prueba1</string>
+    <string>&amp;prueba1</string>
    </property>
   </action>
   <action name="actionprueba2">
    <property name="text">
-    <string>prueba2</string>
+    <string>p&amp;rueba2</string>
    </property>
   </action>
  </widget>
