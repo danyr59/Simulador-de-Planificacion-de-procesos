@@ -20,8 +20,8 @@ int main(int argc, char *argv[])
     randomselection.execute();
     NPPS npps(10);
     npps.execute();
-   // RR rr;
-   // rr.execute();
+    RR rr;
+    rr.execute();
     PS ps(10);
     ps.execute();
     //QApplication a(argc, argv);
