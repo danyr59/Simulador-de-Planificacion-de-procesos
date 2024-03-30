@@ -5,8 +5,9 @@
 #include <algorithm>
 #include "process.h"
 #include "cpu.h"
+#include "base.h"
 
-class SJF
+class SJF : public Base
 {
 public:
     struct Compare
@@ -25,13 +26,14 @@ public:
     };
     // std::queue<sProcess> process_queue;
     std::priority_queue<sProcess, std::vector<sProcess>, Compare> process_queue;
-    std::vector<sProcess> process_list;
+    //std::vector<sProcess> process_list;
 
     std::queue<sProcess> bloqued_process_queue;
     SJF(unsigned);
+    SJF();
     void execute();
    
-    bool is_done();
+    
 };
 
 #endif
