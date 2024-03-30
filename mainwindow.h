@@ -5,6 +5,7 @@
 #include <QLabel>
 #include <QPushButton>
 #include "utils.h"
+#include "controller.h"
 
 QT_BEGIN_NAMESPACE
 namespace Ui {
@@ -22,9 +23,11 @@ public:
 
 private slots:
     void on_pushButton_clicked();
+    void actualizarUI(const QString &datos);
 
 private:
     Ui::MainWindow *ui;
     int contador;
+    Controller *controller; 
 };
 #endif // MAINWINDOW_H

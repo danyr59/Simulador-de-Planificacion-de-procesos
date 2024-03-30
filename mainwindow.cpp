@@ -9,6 +9,8 @@ MainWindow::MainWindow(QWidget *parent)
 {
     ui->setupUi(this);
     contador = 0;
+    controller = new Controller(this);
+    connect(controller, &Controller::datosListos, this,  &MainWindow::actualizarUI);
 }
 
 MainWindow::~MainWindow()
@@ -16,18 +18,14 @@ MainWindow::~MainWindow()
     delete ui;
 }
 
+void MainWindow::actualizarUI(const QString &datos)
+{
+    ui->label->setText(datos);
+}
+
 void MainWindow::on_pushButton_clicked()
 {
     std::cout << "button precionado" << std::endl;
-
-    for (size_t i = 0; i < 5; i++)
-    {
-        /* code */
-        ui->label->setText("paso " + QString::number(i));
-         QThread::sleep(1);
-    }
-    
-    this->close();
-    
+    controller->start();
 }
 
