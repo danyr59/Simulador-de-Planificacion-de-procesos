@@ -12,7 +12,9 @@ void Controller::run()
     //exponer metricas
     //emit datosListos("dato");
     Fcfs fcfs(4);
-    fcfs.bind(this,&Controller::sendData);
+    fcfs.bind([this] (QString data) {
+        emit this->datosListos(data);
+    });
     fcfs.execute();
     
 
