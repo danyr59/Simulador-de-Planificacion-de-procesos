@@ -6,6 +6,8 @@
 #include <chrono>
 #include <thread>
 #include <vector>
+#include <QThread>
+#include <functional>
 
 enum class ALGORITMO {
     NONE,

@@ -1,6 +1,7 @@
 #ifndef CONTROLLER_H
 #define CONTROLLER_H
 #include <QThread>
+#include "fcfs.h"
 
 class Controller : public QThread 
 {
@@ -8,6 +9,7 @@ class Controller : public QThread
 
 public:
     Controller(QObject *parent = nullptr);
+    void sendData(QString);
     
     
     signals:
@@ -16,6 +18,7 @@ public:
     protected:
         void run() override;
 
+    private:
 
     
     

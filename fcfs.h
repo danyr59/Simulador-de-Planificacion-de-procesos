@@ -13,8 +13,6 @@ class Fcfs: public Base
     public:
     std::queue<sProcess> process_queue;
     std::queue<sProcess> bloqued_process_queue;
-    std::vector<sProcess> process_list;
-
 
     Fcfs(int num_process);
 

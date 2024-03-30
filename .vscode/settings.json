@@ -65,6 +65,9 @@
         "codecvt": "cpp",
         "source_location": "cpp",
         "iomanip": "cpp",
-        "format": "cpp"
+        "format": "cpp",
+        "charconv": "cpp",
+        "span": "cpp",
+        "stdfloat": "cpp"
     }
 }

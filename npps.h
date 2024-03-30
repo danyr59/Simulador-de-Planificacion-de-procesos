@@ -3,7 +3,6 @@
 #include <queue>
 #include <vector>
 #include <algorithm>
-#include <functional>
 #include "base.h"
 #include "process.h"
 #include "cpu.h"

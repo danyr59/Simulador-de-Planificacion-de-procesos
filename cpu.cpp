@@ -16,7 +16,8 @@ Cpu::~Cpu()
 
 STATES Cpu::processing()
 {
-    std::this_thread::sleep_for(std::chrono::milliseconds(this->tick));
+    //std::this_thread::sleep_for(std::chrono::milliseconds(this->tick));
+    QThread::msleep(this->tick);
     //procesamiento nulo
     ++num_ticks;
     if(free || current == nullptr)
