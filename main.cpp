@@ -14,13 +14,13 @@ int main(int argc, char *argv[])
     //std::cout << "hola";
     //Fcfs fcfs(8);
     //fcfs.execute();
-    SJF sjf(2);
+    SJF sjf(3);
     sjf.execute();
     RandomSelection randomselection(7);
     randomselection.execute();
     NPPS npps(10);
     npps.execute();
-    RR rr;
+    RR rr(3);
     rr.execute();
     PS ps(10);
     ps.execute();

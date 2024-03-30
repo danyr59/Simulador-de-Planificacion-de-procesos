@@ -104,7 +104,7 @@ void RR::execute()
             }
         }
 
-       
+        std::cout << "h" << std::endl;
     }
-    
+    std::cout << "s" << std::endl;
 }

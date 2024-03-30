@@ -73,7 +73,7 @@ void SJF::execute()
             if (is_done())
                 break;
         }
-        
+        std::cout << "hola" << std::endl;
     }
-    
+    std::cout << "s" << std::endl;
 }
