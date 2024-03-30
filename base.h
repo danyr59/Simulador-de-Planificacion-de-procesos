@@ -8,8 +8,7 @@ public:
     //Controller *controller;
     int num_process;
     std::vector<sProcess> process_list;
-    Stats stats;
-    std::function<void(QString)> sendDataLambda;
+    std::function<void(Stats)> sendDataLambda;
 
     Base() : process_list(){};
     Base(int num_process) : process_list()
@@ -24,7 +23,7 @@ public:
         }
     };
 
-    void bind(std::function<void(QString)> f)
+    void bind(std::function<void(Stats)> f)
     {
        sendDataLambda = f;
     }
@@ -42,6 +41,7 @@ public:
 
     void sendData(bool cpu_free, unsigned tick)
     {
+        Stats stats;
         for (auto p : process_list)
         {
             if (p->status == STATES::READY)
@@ -56,7 +56,7 @@ public:
 
         std::cout << stats.tick << std::endl;
         std::cout << stats.cpu_free << std::endl;
-        sendDataLambda("prueba tick:" + QString::number(stats.tick));
+        sendDataLambda(stats);
     }
 };
 

@@ -9,11 +9,9 @@ class Controller : public QThread
 
 public:
     Controller(QObject *parent = nullptr);
-    void sendData(QString);
-    
     
     signals:
-        void datosListos(const QString &datos);
+        void datosListos(const Stats &datos);
 
     protected:
         void run() override;

@@ -7,6 +7,7 @@
 #include <QLabel>
 #include <QPushButton>
 #include <QMessageBox>
+#include <QStandardItemModel>
 #include "utils.h"
 #include "controller.h"
 
@@ -28,7 +29,7 @@ public:
 
 private slots:
     void on_pushButton_clicked();
-    void actualizarUI(const QString &datos);
+    void actualizarUI(const Stats &datos);
 
     void on_algorithm_select_currentIndexChanged(int index);
 
