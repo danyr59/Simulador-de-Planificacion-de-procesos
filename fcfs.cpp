@@ -14,10 +14,10 @@ bool Fcfs::is_done()
     return true;
 }
 
-void Fcfs::execute()
+void Fcfs::execute(unsigned tick_p, unsigned quantum_p = 0)
 {
 
-    Cpu cpu(2, 0);
+    Cpu cpu(tick_p, quantum_p);
 
     while (true)
     {

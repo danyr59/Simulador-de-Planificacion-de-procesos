@@ -28,7 +28,7 @@ public:
        sendDataLambda = f;
     }
     // ejecucion de algoritmo
-    virtual void execute(){};
+    virtual void execute(unsigned, unsigned){};
     bool is_done()
     {
         for (auto p : process_list)

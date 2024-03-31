@@ -36,7 +36,7 @@ class NPPS: public Base
     
     void push(sProcess p);
     sProcess pop();
-    void execute();
+    void execute(unsigned, unsigned);
     bool empty();
     //funcion para sacar metricas
 

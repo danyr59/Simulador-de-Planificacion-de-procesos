@@ -8,28 +8,25 @@ RR::RR()
     process_list.push_back(std::make_shared<Process>(Process(4, 5, 5)));
     process_list.push_back(std::make_shared<Process>(Process(5, 4, 3)));
 
+    process_list.push_back(std::make_shared<Process>(Process(6, 50, 10)));
+
     // ordenar procesos por tiempo de llegada
     std::sort(process_list.begin(), process_list.end(), [&](sProcess a, sProcess b)
               { return a->arrival_time < b->arrival_time; });
 }
 
-bool RR::is_done()
+RR::RR(unsigned num_procesos) : Base(num_procesos)
 {
-    for (auto p : process_list)
-    {
-        if (p->status != STATES::DONE)
-            return false;
-    }
-    return true;
+    std::sort(process_list.begin(), process_list.end(), [&](sProcess a, sProcess b)
+              { return a->arrival_time < b->arrival_time; });
 }
 
-void RR::execute()
+void RR::execute(unsigned tick_p, unsigned quantum_p = 0)
 {
 
-    Cpu cpu(2, 2);
+    Cpu cpu(1, 2);
     unsigned time = 0;
     bool add_process_interrup = false;
-
 
     while (true)
     {
@@ -42,7 +39,7 @@ void RR::execute()
             if (cpu.num_ticks == p->arrival_time)
             {
                 process_queue.push(p);
-                break;
+
             }
 
             // añadir a la cola cuando dismuya x cantidad de tick  definido por el quantum
@@ -50,9 +47,11 @@ void RR::execute()
 
         if (add_process_interrup)
         {
-            process_queue.push(cpu.interrupt());
+            if (cpu.getCurrentProcess() == NULL)
+                std::cout << "current is null" << std::endl;
             time = 0;
-            
+            // if (cpu.getCurrentProcess() != NULL)
+            process_queue.push(cpu.interrupt());
             add_process_interrup = false;
         }
 
@@ -87,13 +86,14 @@ void RR::execute()
         {
             if (is_done())
                 break;
-                //para metricas mostrar el current(variable local)
-                //ya que el cpu en este momento no apunta a nada 
-            
-
+            // para metricas mostrar el current(variable local)
+            // ya que el cpu en este momento no apunta a nada
         }
         else if (state == STATES::EXECUTE)
         {
+            if (current == NULL || cpu.is_free())
+                continue;
+
             if (time == cpu.getQuantum() - 1)
             {
                 add_process_interrup = true;
@@ -103,7 +103,9 @@ void RR::execute()
                 ++time;
             }
         }
+        sendData(cpu.is_free(), cpu.num_ticks);
 
-        std::cout << "h" << std::endl;
+
     }
+
 }

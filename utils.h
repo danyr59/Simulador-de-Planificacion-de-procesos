@@ -9,6 +9,8 @@
 #include <QThread>
 #include <functional>
 
+
+
 enum class ALGORITMO {
     NONE,
     FCFS,
@@ -19,6 +21,7 @@ enum class ALGORITMO {
     SRTF,
     PBEPE
 };
+
 
 enum class STATES
 {

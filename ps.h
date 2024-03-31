@@ -42,7 +42,7 @@ class PS: public Base
     
     void push(sProcess p);
     sProcess pop(ushort &cbtl);
-    void execute();
+    void execute(unsigned, unsigned);
     bool empty();
     //funcion para sacar metricas
 

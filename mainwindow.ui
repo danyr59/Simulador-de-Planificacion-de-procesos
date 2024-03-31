@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>800</width>
-    <height>600</height>
+    <width>1190</width>
+    <height>764</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -17,8 +17,8 @@
    <widget class="QPushButton" name="pushButton">
     <property name="geometry">
      <rect>
-      <x>330</x>
-      <y>500</y>
+      <x>530</x>
+      <y>670</y>
       <width>121</width>
       <height>34</height>
      </rect>
@@ -30,7 +30,7 @@
    <widget class="QWidget" name="layoutWidget">
     <property name="geometry">
      <rect>
-      <x>630</x>
+      <x>830</x>
       <y>20</y>
       <width>91</width>
       <height>58</height>
@@ -52,7 +52,7 @@
    <widget class="QWidget" name="layoutWidget">
     <property name="geometry">
      <rect>
-      <x>500</x>
+      <x>700</x>
       <y>20</y>
       <width>101</width>
       <height>58</height>
@@ -62,7 +62,7 @@
      <item>
       <widget class="QLabel" name="label">
        <property name="text">
-        <string>Tick</string>
+        <string>Tick by second</string>
        </property>
       </widget>
      </item>
@@ -74,7 +74,7 @@
    <widget class="QWidget" name="layoutWidget">
     <property name="geometry">
      <rect>
-      <x>330</x>
+      <x>530</x>
       <y>20</y>
       <width>130</width>
       <height>58</height>
@@ -96,7 +96,7 @@
    <widget class="QWidget" name="layoutWidget">
     <property name="geometry">
      <rect>
-      <x>20</x>
+      <x>220</x>
       <y>20</y>
       <width>256</width>
       <height>58</height>
@@ -154,25 +154,12 @@
    <widget class="QWidget" name="data_widget" native="true">
     <property name="geometry">
      <rect>
-      <x>10</x>
+      <x>20</x>
       <y>120</y>
-      <width>781</width>
-      <height>361</height>
+      <width>1141</width>
+      <height>371</height>
      </rect>
     </property>
-    <widget class="QLabel" name="output_label">
-     <property name="geometry">
-      <rect>
-       <x>20</x>
-       <y>10</y>
-       <width>221</width>
-       <height>20</height>
-      </rect>
-     </property>
-     <property name="text">
-      <string>TextLabel</string>
-     </property>
-    </widget>
     <widget class="QLabel" name="label_5">
      <property name="geometry">
       <rect>
@@ -197,15 +184,15 @@
       <rect>
        <x>10</x>
        <y>70</y>
-       <width>251</width>
-       <height>192</height>
+       <width>381</width>
+       <height>281</height>
       </rect>
      </property>
     </widget>
     <widget class="QLabel" name="label_6">
      <property name="geometry">
       <rect>
-       <x>280</x>
+       <x>430</x>
        <y>40</y>
        <width>221</width>
        <height>18</height>
@@ -224,56 +211,17 @@
     <widget class="QTableView" name="table_bloqued">
      <property name="geometry">
       <rect>
-       <x>270</x>
+       <x>410</x>
        <y>70</y>
-       <width>251</width>
-       <height>192</height>
+       <width>361</width>
+       <height>281</height>
       </rect>
      </property>
-    </widget>
-    <widget class="QGroupBox" name="groupBox">
-     <property name="geometry">
-      <rect>
-       <x>260</x>
-       <y>270</y>
-       <width>291</width>
-       <height>80</height>
-      </rect>
-     </property>
-     <property name="title">
-      <string>Proceso en ejecucion</string>
-     </property>
-     <widget class="QLabel" name="current_id">
-      <property name="geometry">
-       <rect>
-        <x>20</x>
-        <y>40</y>
-        <width>58</width>
-        <height>18</height>
-       </rect>
-      </property>
-      <property name="text">
-       <string>TextLabel</string>
-      </property>
-     </widget>
-     <widget class="QLabel" name="current_time">
-      <property name="geometry">
-       <rect>
-        <x>167</x>
-        <y>40</y>
-        <width>111</width>
-        <height>20</height>
-       </rect>
-      </property>
-      <property name="text">
-       <string>TextLabel</string>
-      </property>
-     </widget>
     </widget>
     <widget class="QLabel" name="label_7">
      <property name="geometry">
       <rect>
-       <x>550</x>
+       <x>810</x>
        <y>40</y>
        <width>221</width>
        <height>18</height>
@@ -292,13 +240,65 @@
     <widget class="QTableView" name="table_done">
      <property name="geometry">
       <rect>
-       <x>530</x>
+       <x>790</x>
        <y>70</y>
-       <width>251</width>
-       <height>192</height>
+       <width>341</width>
+       <height>281</height>
       </rect>
      </property>
     </widget>
+   </widget>
+   <widget class="QGroupBox" name="groupBox">
+    <property name="geometry">
+     <rect>
+      <x>450</x>
+      <y>520</y>
+      <width>291</width>
+      <height>80</height>
+     </rect>
+    </property>
+    <property name="title">
+     <string>Proceso en ejecucion</string>
+    </property>
+    <widget class="QLabel" name="current_id">
+     <property name="geometry">
+      <rect>
+       <x>20</x>
+       <y>40</y>
+       <width>58</width>
+       <height>18</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string>TextLabel</string>
+     </property>
+    </widget>
+    <widget class="QLabel" name="current_time">
+     <property name="geometry">
+      <rect>
+       <x>167</x>
+       <y>40</y>
+       <width>111</width>
+       <height>20</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string>TextLabel</string>
+     </property>
+    </widget>
+   </widget>
+   <widget class="QLabel" name="output_label">
+    <property name="geometry">
+     <rect>
+      <x>450</x>
+      <y>610</y>
+      <width>221</width>
+      <height>20</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>Tick del procesador</string>
+    </property>
    </widget>
   </widget>
   <widget class="QMenuBar" name="menubar">
@@ -306,7 +306,7 @@
     <rect>
      <x>0</x>
      <y>0</y>
-     <width>800</width>
+     <width>1190</width>
      <height>21</height>
     </rect>
    </property>

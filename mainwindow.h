@@ -33,6 +33,12 @@ private slots:
 
     void on_algorithm_select_currentIndexChanged(int index);
 
+    void on_process_number_valueChanged(int arg1);
+
+    void on_tick_number_valueChanged(int arg1);
+
+    void on_quantum_valueChanged(int arg1);
+
 private:
     Ui::MainWindow *ui;
     Controller *controller;
@@ -43,5 +49,6 @@ private:
     void Message(QString);
     void iniciar_modelos();
     void agregar_data(QStandardItemModel *, const std::vector<data_process> &);
+    bool warnings();
 };
 #endif // MAINWINDOW_H

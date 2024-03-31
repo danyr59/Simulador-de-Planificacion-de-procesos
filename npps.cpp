@@ -71,7 +71,7 @@ sProcess NPPS::pop()
     
 }
 
-void NPPS::execute()
+void NPPS::execute(unsigned tick_p, unsigned quantum_p = 0)
 {
     Cpu cpu(2, 0);
     int p_index = 0;

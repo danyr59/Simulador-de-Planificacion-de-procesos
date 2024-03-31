@@ -18,7 +18,7 @@ class Fcfs: public Base
     //funcion para sacar metricas
 
     //ejecucion de algoritmo
-    void execute(); 
+    void execute(unsigned, unsigned);
     bool is_done();
 };
 

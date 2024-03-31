@@ -13,7 +13,7 @@ private:
 
 public:
     RandomSelection(int num_process);
-    void execute(); 
+    void execute(unsigned , unsigned );
     bool is_done();
 };
 

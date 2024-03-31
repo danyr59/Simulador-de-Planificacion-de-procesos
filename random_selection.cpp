@@ -17,7 +17,7 @@ bool RandomSelection::is_done() {
     return true;
 }
 
-void RandomSelection::execute() {
+void RandomSelection::execute(unsigned tick_p, unsigned quantum_p = 0) {
 
     Cpu cpu(2, 0);
 

@@ -12,6 +12,7 @@ MainWindow::MainWindow(QWidget *parent)
     model_bloqued = nullptr;
     model_ready = nullptr;
     model_done = nullptr;
+   // showMaximized();
 }
 
 MainWindow::~MainWindow()
@@ -75,7 +76,7 @@ void MainWindow::agregar_data(QStandardItemModel *model, const std::vector<data_
 
 void MainWindow::actualizarUI(const Stats &datos)
 {
-    ui->output_label->setText("numero de string:" + QString::number(datos.tick));
+    ui->output_label->setText("Tick del Procesador: " + QString::number(datos.tick));
 
 
     iniciar_modelos();
@@ -96,27 +97,86 @@ void MainWindow::actualizarUI(const Stats &datos)
     }
 }
 
-void MainWindow::on_pushButton_clicked()
-{
+bool MainWindow::warnings(){
     // verificar que antes de presionar el botom tener datos
     if (ui->algorithm_select->currentIndex() == 0)
     {
         this->Message("Debe seleccionar un algoritmo");
-        return;
+        return true;
     }
 
-    // de lo contrario mostrar mensaje
+    if(controller->quantity_process == 0){
+        this->Message("Debe seleccionar la cantidad de procesos");
+        return true;
+    }
+
+    if(controller->tick == 0){
+        this->Message("Debe seleccionar cuantos segundos deber durar un tick");
+        return true;
+    }
+    if (alg == ALGORITMO::RR || alg == ALGORITMO::SRTF ||  alg == ALGORITMO::PBEPE)
+    {
+        if(controller->quantum == 0){
+            this->Message("Debe seleccionar cuantas unidades de tick va a durar cada proceso en la CPU");
+            return true;
+        }
+    }
+    return false;
+}
+
+void MainWindow::on_pushButton_clicked()
+{
+
+
+    if(warnings())
+        return;
 
     std::cout << "algoritmo: " << ui->algorithm_select->currentIndex() << std::endl;
     std::cout << "numero de procesos: " << ui->process_number->value() << std::endl;
     std::cout << "numero de tick: " << ui->tick_number->value() << std::endl;
     ui->data_widget->show();
+    controller->setTypeAlgorithm(alg);
     controller->start();
+}
+std::string AlgoritmoToString(ALGORITMO a) {
+    std::string selected;
+    switch(a) {
+    case ALGORITMO::NONE:
+        selected = "NONE";
+        break;
+    case ALGORITMO::FCFS:
+        selected = "FCFS";
+        break;
+    case ALGORITMO::SJF:
+        selected = "SJF";
+        break;
+    case ALGORITMO::SA:
+        selected = "SA";
+        break;
+    case ALGORITMO::PBEPNE:
+        selected = "PBEPNE";
+        break;
+    case ALGORITMO::RR:
+        selected = "RR";
+        break;
+    case ALGORITMO::SRTF:
+        selected = "SRTF";
+        break;
+    case ALGORITMO::PBEPE:
+        selected = "PBEPE";
+        break;
+    default:
+        selected = "Desconocido";
+        break;
+    }
+    return selected;
 }
 
 void MainWindow::on_algorithm_select_currentIndexChanged(int index)
 {
     alg = static_cast<ALGORITMO>(index);
+
+    std::cout << "Nombre del valor del enum: " << AlgoritmoToString(alg) << std::endl;
 
     if (alg == ALGORITMO::FCFS || alg == ALGORITMO::SJF || alg == ALGORITMO::SA || alg == ALGORITMO::PBEPNE)
     {
@@ -140,3 +200,21 @@ void MainWindow::Message(QString text)
     messageBox.setStandardButtons(QMessageBox::Ok);
     messageBox.exec();
 }
+
+void MainWindow::on_process_number_valueChanged(int arg1)
+{
+    this->controller->quantity_process = arg1;
+}
+
+
+void MainWindow::on_tick_number_valueChanged(int arg1)
+{
+    this->controller->tick = arg1;
+}
+
+
+void MainWindow::on_quantum_valueChanged(int arg1)
+{
+    this->controller->quantum = arg1;
+}
+

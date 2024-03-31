@@ -36,7 +36,7 @@ void Process::generate_block_point()
     if(burst_time > 2)
     {
         
-        int probability = generateRandomNum(0, 5);
+        int probability = generateRandomNum(0, 20);
         if (probability == 1)
         {
             //this->block_point = 4;
