@@ -36,8 +36,11 @@ private slots:
 private:
     Ui::MainWindow *ui;
     Controller *controller;
-
+    QStandardItemModel *model_ready;
+    QStandardItemModel *model_bloqued;
     //funtions
     void Message(QString);
+    void iniciar_modelos();
+    void agregar_data(QStandardItemModel *, const std::vector<data_process> &);
 };
 #endif // MAINWINDOW_H

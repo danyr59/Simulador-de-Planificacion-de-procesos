@@ -9,6 +9,8 @@ MainWindow::MainWindow(QWidget *parent)
     controller = new Controller(this);
     connect(controller, &Controller::datosListos, this, &MainWindow::actualizarUI);
     ui->data_widget->hide();
+    model_bloqued = nullptr;
+    model_ready = nullptr;
 }
 
 MainWindow::~MainWindow()
@@ -17,22 +19,36 @@ MainWindow::~MainWindow()
     delete controller;
 }
 
-void MainWindow::actualizarUI(const Stats &datos)
+void MainWindow::iniciar_modelos()
 {
-    ui->output_label->setText("numero de string:" + QString::number(datos.tick));
-   
-
-    QStandardItemModel *model = new QStandardItemModel(this);
-
-   
-    model->setHorizontalHeaderLabels(QStringList() << "Proceso"
-                                                   << "Prioridad"
-                                                   << "Burst time");
-
-    int i = 0;
-    for(auto p : datos.ready)
+    if(model_ready == nullptr)
     {
-        
+        model_ready = new QStandardItemModel(this);
+        ui->table_ready->setModel(model_ready);
+    }
+    if(model_bloqued == nullptr)
+    {
+        model_bloqued = new QStandardItemModel(this);
+
+        ui->table_bloqued->setModel(model_bloqued);
+    }
+
+    model_bloqued->clear();
+    model_ready->clear();
+    model_bloqued->setHorizontalHeaderLabels(QStringList() << "Proceso"
+                                                           << "Prioridad"
+                                                           << "Burst time");
+    model_ready->setHorizontalHeaderLabels(QStringList() << "Proceso"
+                                                         << "Prioridad"
+                                                         << "Burst time");
+}
+
+void MainWindow::agregar_data(QStandardItemModel *model, const std::vector<data_process> &datos)
+{
+    int i = 0;
+    for(auto p : datos)
+    {
+
         QList<QStandardItem *> items;
         items.append(new QStandardItem(QString::number(p.id).arg(i)));
         items.append(new QStandardItem(QString::number(p.priority).arg(i + 1)));
@@ -41,10 +57,28 @@ void MainWindow::actualizarUI(const Stats &datos)
         ++i;
     }
 
-    ui->current_id->setText("ID: " + QString::number(datos.execution_process.id));
-    ui->current_time->setText("Burst time: " + QString::number(datos.execution_process.burst_time));
+}
 
-    ui->table_ready->setModel(model);
+void MainWindow::actualizarUI(const Stats &datos)
+{
+    ui->output_label->setText("numero de string:" + QString::number(datos.tick));
+
+
+    iniciar_modelos();
+
+    agregar_data(this->model_ready, datos.ready);
+    agregar_data(this->model_bloqued, datos.blocked);
+
+    if(datos.cpu_free)
+    {
+        ui->current_id->setText("ID: NONE" );
+        ui->current_time->setText("Burst time: ");
+    }else
+
+    {
+        ui->current_id->setText("ID: " + QString::number(datos.execution_process.id));
+        ui->current_time->setText("Burst time: " + QString::number(datos.execution_process.burst_time));
+    }
 }
 
 void MainWindow::on_pushButton_clicked()
