@@ -41,6 +41,9 @@ void MainWindow::actualizarUI(const Stats &datos)
         ++i;
     }
 
+    ui->current_id->setText("ID: " + QString::number(datos.execution_process.id));
+    ui->current_time->setText("Burst time: " + QString::number(datos.execution_process.burst_time));
+
     ui->table_ready->setModel(model);
 }
 

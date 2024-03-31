@@ -56,6 +56,13 @@ public:
 
         std::cout << stats.tick << std::endl;
         std::cout << stats.cpu_free << std::endl;
+
+        for(auto p : stats.ready)
+        {
+            std::cout << "{" << p.id << "," << p.burst_time << "}" << std::endl;
+        }
+        std::cout << "========================" << std::endl;
+
         sendDataLambda(stats);
     }
 };
