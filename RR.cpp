@@ -39,7 +39,7 @@ void RR::execute()
             if (cpu.num_ticks == p->arrival_time)
             {
                 process_queue.push(p);
-                break;
+                
             }
 
             // añadir a la cola cuando dismuya x cantidad de tick  definido por el quantum

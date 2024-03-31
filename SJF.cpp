@@ -35,7 +35,7 @@ void SJF::execute()
             if (cpu.num_ticks == process->arrival_time)
             {
                 process_queue.push(process);
-                break;
+                
             }
         }
 
