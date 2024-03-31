@@ -50,6 +50,9 @@ public:
                 stats.execution_process = {p->pid, p->priority, p->burst_time};
             if (p->status == STATES::BLOCKED)
                 stats.blocked.push_back({p->pid, p->priority, p->burst_time});
+            if(p->status == STATES::DONE){
+                stats.done.push_back({p->pid, p->priority, p->burst_time});
+            }
         }
         stats.cpu_free = cpu_free;
         stats.tick = tick;

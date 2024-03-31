@@ -11,12 +11,16 @@ MainWindow::MainWindow(QWidget *parent)
     ui->data_widget->hide();
     model_bloqued = nullptr;
     model_ready = nullptr;
+    model_done = nullptr;
 }
 
 MainWindow::~MainWindow()
 {
     delete ui;
     delete controller;
+    delete model_bloqued;
+    delete model_ready;
+    delete model_done;
 }
 
 void MainWindow::iniciar_modelos()
@@ -33,12 +37,22 @@ void MainWindow::iniciar_modelos()
         ui->table_bloqued->setModel(model_bloqued);
     }
 
+    if(model_done == nullptr){
+        model_done = new QStandardItemModel(this);
+        ui->table_done->setModel(model_done);
+    }
+
+
     model_bloqued->clear();
     model_ready->clear();
+    model_done->clear();
     model_bloqued->setHorizontalHeaderLabels(QStringList() << "Proceso"
                                                            << "Prioridad"
                                                            << "Burst time");
     model_ready->setHorizontalHeaderLabels(QStringList() << "Proceso"
+                                                         << "Prioridad"
+                                                         << "Burst time");
+    model_done->setHorizontalHeaderLabels(QStringList() << "Proceso"
                                                          << "Prioridad"
                                                          << "Burst time");
 }
@@ -68,6 +82,7 @@ void MainWindow::actualizarUI(const Stats &datos)
 
     agregar_data(this->model_ready, datos.ready);
     agregar_data(this->model_bloqued, datos.blocked);
+    agregar_data(this->model_done, datos.done);
 
     if(datos.cpu_free)
     {

@@ -38,6 +38,7 @@ private:
     Controller *controller;
     QStandardItemModel *model_ready;
     QStandardItemModel *model_bloqued;
+    QStandardItemModel *model_done;
     //funtions
     void Message(QString);
     void iniciar_modelos();
