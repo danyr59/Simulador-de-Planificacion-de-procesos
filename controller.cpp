@@ -24,7 +24,7 @@ std::unique_ptr<Base> Controller::instanceAlgotithm(ALGORITMO a){
 
         break;
     case ALGORITMO::PBEPNE:
-        algorithm = std::make_unique<Fcfs>(4);
+        algorithm = std::make_unique<NPPS>(this->quantity_process);
 
         break;
     case ALGORITMO::RR:

@@ -5,8 +5,8 @@
 class Base
 {
 public:
-    //Controller *controller;
     int num_process;
+    Final_stats fstats;
     std::vector<sProcess> process_list;
     std::function<void(Stats)> sendDataLambda;
 
@@ -15,6 +15,9 @@ public:
     {
         this->num_process = num_process;
         unsigned arraival_time = 0;
+        fstats.total_free = 0;
+        fstats.total_occupied = 0;
+        fstats.total_free = 0;
         //controller = nullptr;
         for (int i = 0; i < num_process; ++i)
         {
@@ -45,7 +48,16 @@ public:
         for (auto p : process_list)
         {
             if (p->status == STATES::READY)
+            {
                 stats.ready.push_back({p->pid, p->priority, p->burst_time});
+                if(auto search = fstats.map_ready.find(p->pid); search != fstats.map_ready.end())
+                {
+
+                }else
+                {
+
+                }
+            }
             if (p->status == STATES::EXECUTE)
                 stats.execution_process = {p->pid, p->priority, p->burst_time};
             if (p->status == STATES::BLOCKED)
@@ -65,6 +77,13 @@ public:
             std::cout << "{" << p.id << "," << p.burst_time << "}" << std::endl;
         }
         std::cout << "========================" << std::endl;
+
+        ++fstats.total_tick;
+
+        if(cpu_free)
+            ++fstats.total_free;
+        else
+            ++fstats.total_occupied;
 
         sendDataLambda(stats);
     }

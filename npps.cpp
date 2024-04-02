@@ -32,6 +32,7 @@ bool NPPS::empty()
 
 void NPPS::push(sProcess p)
 {
+    p->status = STATES::READY;
     if(p->priority < hight_limit)
         process_queue_h.push(p);
     else if(p->priority < mid_limit)
@@ -114,6 +115,8 @@ void NPPS::execute(unsigned tick_p, unsigned quantum_p = 0)
             if (is_done())
                 break;
         }
+
+        this->sendData(cpu.is_free(), cpu.num_ticks);
        
     }
 }

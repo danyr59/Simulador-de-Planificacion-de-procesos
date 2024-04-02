@@ -56,6 +56,19 @@ void MainWindow::iniciar_modelos()
     model_done->setHorizontalHeaderLabels(QStringList() << "Proceso"
                                                          << "Prioridad"
                                                          << "Burst time");
+
+    ui->table_ready->setColumnWidth(0, 100);
+    ui->table_ready->setColumnWidth(1, 140);
+    ui->table_ready->setColumnWidth(2, 140);
+    ui->table_ready->verticalHeader()->setVisible(false);
+    ui->table_bloqued->setColumnWidth(0, 100);
+    ui->table_bloqued->setColumnWidth(1, 140);
+    ui->table_bloqued->setColumnWidth(2, 140);
+    ui->table_bloqued->verticalHeader()->setVisible(false);
+    ui->table_done->setColumnWidth(0, 100);
+    ui->table_done->setColumnWidth(1, 140);
+    ui->table_done->setColumnWidth(2, 140);
+    ui->table_done->verticalHeader()->setVisible(false);
 }
 
 void MainWindow::agregar_data(QStandardItemModel *model, const std::vector<data_process> &datos)
@@ -89,11 +102,13 @@ void MainWindow::actualizarUI(const Stats &datos)
     {
         ui->current_id->setText("ID: NONE" );
         ui->current_time->setText("Burst time: ");
+        ui->current_time_2->setText("Priority: ");
     }else
 
     {
         ui->current_id->setText("ID: " + QString::number(datos.execution_process.id));
         ui->current_time->setText("Burst time: " + QString::number(datos.execution_process.burst_time));
+        ui->current_time_2->setText("Priority: " + QString::number(datos.execution_process.priority));
     }
 }
 
@@ -134,6 +149,7 @@ void MainWindow::on_pushButton_clicked()
     std::cout << "algoritmo: " << ui->algorithm_select->currentIndex() << std::endl;
     std::cout << "numero de procesos: " << ui->process_number->value() << std::endl;
     std::cout << "numero de tick: " << ui->tick_number->value() << std::endl;
+
     ui->data_widget->show();
     controller->setTypeAlgorithm(alg);
     controller->start();

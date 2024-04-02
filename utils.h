@@ -8,6 +8,7 @@
 #include <vector>
 #include <QThread>
 #include <functional>
+#include <unordered_map>
 
 
 
@@ -51,6 +52,15 @@ struct Stats
     /* data */
 };
 
+struct Final_stats
+{
+    unsigned total_tick;
+    unsigned total_occupied;
+    unsigned total_free;
+    std::unordered_map<unsigned,ushort> map_ready;
+    std::unordered_map<unsigned,ushort> map_blocked;
+    std::unordered_map<unsigned,ushort> map_execution;
+};
 
 typedef unsigned short int ushort;
 
