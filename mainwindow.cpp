@@ -110,6 +110,8 @@ void MainWindow::actualizarUI(const Stats &datos)
         ui->current_time->setText("Burst time: " + QString::number(datos.execution_process.burst_time));
         ui->current_time_2->setText("Priority: " + QString::number(datos.execution_process.priority));
     }
+
+    this->resultados_finales(datos);
 }
 
 bool MainWindow::warnings(){
@@ -234,3 +236,16 @@ void MainWindow::on_quantum_valueChanged(int arg1)
     this->controller->quantum = arg1;
 }
 
+
+void MainWindow::resultados_finales(const Stats &stats)
+{
+    if(!stats.final)
+        return;
+
+    ui->table_bloqued->setVisible(false);
+    ui->table_ready->setVisible(false);
+
+    std::cout << "Finales total free " << stats.finals.total_free << std::endl;
+    std::cout << "Finales total bloqued " << stats.finals.total_occupied << std::endl;
+    std::cout << "Finales total " << stats.finals.total_tick << std::endl;
+}

@@ -113,7 +113,10 @@ void NPPS::execute(unsigned tick_p, unsigned quantum_p = 0)
         }else if (state == STATES::DONE)
         {
             if (is_done())
+            {
+                this->sendData(cpu.is_free(), cpu.num_ticks, true);
                 break;
+            }
         }
 
         this->sendData(cpu.is_free(), cpu.num_ticks);

@@ -42,7 +42,7 @@ public:
         return true;
     };
 
-    void sendData(bool cpu_free, unsigned tick)
+    void sendData(bool cpu_free, unsigned tick, bool final = false)
     {
         Stats stats;
         for (auto p : process_list)
@@ -52,16 +52,34 @@ public:
                 stats.ready.push_back({p->pid, p->priority, p->burst_time});
                 if(auto search = fstats.map_ready.find(p->pid); search != fstats.map_ready.end())
                 {
-
+                    ++search->second;
                 }else
                 {
-
+                    fstats.map_ready.insert({p->pid, 0});
                 }
             }
             if (p->status == STATES::EXECUTE)
+            {
                 stats.execution_process = {p->pid, p->priority, p->burst_time};
+                if(auto search = fstats.map_execution.find(p->pid); search != fstats.map_execution.end())
+                {
+                    ++search->second;
+                }else
+                {
+                    fstats.map_execution.insert({p->pid, 0});
+                }
+            }
             if (p->status == STATES::BLOCKED)
+            {
                 stats.blocked.push_back({p->pid, p->priority, p->burst_time});
+                if(auto search = fstats.map_blocked.find(p->pid); search != fstats.map_blocked.end())
+                {
+                    ++search->second;
+                }else
+                {
+                    fstats.map_blocked.insert({p->pid, 0});
+                }
+            }
             if(p->status == STATES::DONE){
                 stats.done.push_back({p->pid, p->priority, p->burst_time});
             }
@@ -85,6 +103,9 @@ public:
         else
             ++fstats.total_occupied;
 
+        stats.final = final;
+        if(final)
+            stats.finals = this->fstats;
         sendDataLambda(stats);
     }
 };

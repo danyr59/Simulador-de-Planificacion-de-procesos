@@ -40,6 +40,16 @@ struct data_process
     unsigned burst_time;
 };
 
+struct Final_stats
+{
+    unsigned total_tick;
+    unsigned total_occupied;
+    unsigned total_free;
+    std::unordered_map<unsigned,ushort> map_ready;
+    std::unordered_map<unsigned,ushort> map_blocked;
+    std::unordered_map<unsigned,ushort> map_execution;
+};
+
 
 struct Stats
 {
@@ -49,17 +59,8 @@ struct Stats
     std::vector<data_process> done;
     bool cpu_free;
     unsigned tick;
-    /* data */
-};
-
-struct Final_stats
-{
-    unsigned total_tick;
-    unsigned total_occupied;
-    unsigned total_free;
-    std::unordered_map<unsigned,ushort> map_ready;
-    std::unordered_map<unsigned,ushort> map_blocked;
-    std::unordered_map<unsigned,ushort> map_execution;
+    Final_stats finals;
+    bool final;
 };
 
 typedef unsigned short int ushort;

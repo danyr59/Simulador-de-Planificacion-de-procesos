@@ -8,6 +8,7 @@
 #include <QPushButton>
 #include <QMessageBox>
 #include <QStandardItemModel>
+
 #include "utils.h"
 #include "controller.h"
 
@@ -49,6 +50,7 @@ private:
     void Message(QString);
     void iniciar_modelos();
     void agregar_data(QStandardItemModel *, const std::vector<data_process> &);
+    void resultados_finales(const Stats &);
     bool warnings();
 };
 #endif // MAINWINDOW_H
