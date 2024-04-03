@@ -13,3 +13,14 @@ void sleep(unsigned time)
     std::chrono::milliseconds tiempoEspera(time);
     std::this_thread::sleep_for(tiempoEspera);
 }
+
+ushort generateAverage(const std::unordered_map<unsigned,ushort> &map)
+{
+    if(map.size() == 0)
+        return 0;
+    ushort value = 0;
+    for(auto p : map)
+        value += p.second;
+    value = value/map.size();
+    return value;
+}

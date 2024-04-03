@@ -9,6 +9,8 @@ MainWindow::MainWindow(QWidget *parent)
     controller = new Controller(this);
     connect(controller, &Controller::datosListos, this, &MainWindow::actualizarUI);
     ui->data_widget->hide();
+    ui->chart_view->hide();
+    ui->chart_view_2->hide();
     model_bloqued = nullptr;
     model_ready = nullptr;
     model_done = nullptr;
@@ -153,6 +155,12 @@ void MainWindow::on_pushButton_clicked()
     std::cout << "numero de tick: " << ui->tick_number->value() << std::endl;
 
     ui->data_widget->show();
+    ui->label_5->show();
+    ui->label_6->show();
+    ui->table_bloqued->show();
+    ui->table_ready->show();
+    ui->chart_view_2->hide();
+    ui->chart_view->hide();
     controller->setTypeAlgorithm(alg);
     controller->start();
 }
@@ -248,4 +256,59 @@ void MainWindow::resultados_finales(const Stats &stats)
     std::cout << "Finales total free " << stats.finals.total_free << std::endl;
     std::cout << "Finales total bloqued " << stats.finals.total_occupied << std::endl;
     std::cout << "Finales total " << stats.finals.total_tick << std::endl;
+
+    // Crear la serie de datos
+    QPieSeries *series = new QPieSeries(this);
+
+    // Añadir datos a la serie
+    series->append("Usado", stats.finals.total_occupied);
+    series->append("Libre", stats.finals.total_free);
+    series->slices()[0]->setBrush(Qt::green);
+    series->slices()[1]->setBrush(Qt::blue);
+
+    for(auto slice : series->slices())
+        slice->setLabel(slice->label() + QString(" %1%").arg(100*slice->percentage(), 0, 'f', 1));
+
+    series->setPieSize(0.9);
+
+    // Crear el gráfico
+    ui->chart_view_2->chart()->removeAllSeries();
+    ui->chart_view->chart()->addSeries(series);
+    ui->chart_view->chart()->setTitle("Uso del CPU");
+    ui->chart_view->show();
+
+    //grafico de barras
+    ushort bloqued_average = generateAverage(stats.finals.map_blocked);
+    ushort ready_average = generateAverage(stats.finals.map_ready);
+    ushort execution_average = generateAverage(stats.finals.map_execution);
+
+    QBarSeries *series2 = new QBarSeries(this);
+
+    // Add data to the series
+    QBarSet *set1 = new QBarSet("Bloqueado", this);
+    set1->append(bloqued_average);
+    series2->append(set1);
+
+    QBarSet *set2 = new QBarSet("Espera", this);
+    set2->append(ready_average);
+    series2->append(set2);
+
+    QBarSet *set3 = new QBarSet("Ejecucion", this);
+    set3->append(execution_average);
+    series2->append(set3);
+
+    ui->chart_view_2->chart()->removeAllSeries();
+    ui->chart_view_2->chart()->addSeries(series2);
+
+    QValueAxis *axisY = new QValueAxis(this);
+    //axisY->setRange(0,15);
+    ui->chart_view_2->chart()->addAxis(axisY, Qt::AlignLeft);
+    series2->attachAxis(axisY);
+
+
+    ui->chart_view_2->chart()->setTitle("Tiempo promedio");
+    ui->chart_view_2->show();
+
+    ui->label_5->hide();
+    ui->label_6->hide();
 }

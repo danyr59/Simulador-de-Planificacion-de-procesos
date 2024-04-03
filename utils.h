@@ -67,6 +67,8 @@ typedef unsigned short int ushort;
 
 unsigned generateRandomNum(int min, int max);
 
+ushort generateAverage(const std::unordered_map<unsigned,ushort> &);
+
 //sleep for time milliseconds
 void sleep(unsigned time);
 

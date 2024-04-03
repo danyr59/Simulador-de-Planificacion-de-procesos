@@ -8,6 +8,12 @@
 #include <QPushButton>
 #include <QMessageBox>
 #include <QStandardItemModel>
+#include <QtCharts/QChart>
+#include <QtCharts/QPieSeries>
+#include <QtCharts/QChartView>
+#include <QtCharts/QBarSeries>
+#include <QtCharts/QBarSet>
+#include <QtCharts/QValueAxis>
 
 #include "utils.h"
 #include "controller.h"

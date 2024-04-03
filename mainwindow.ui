@@ -247,6 +247,26 @@
       </rect>
      </property>
     </widget>
+    <widget class="QChartView" name="chart_view">
+     <property name="geometry">
+      <rect>
+       <x>20</x>
+       <y>70</y>
+       <width>351</width>
+       <height>281</height>
+      </rect>
+     </property>
+    </widget>
+    <widget class="QChartView" name="chart_view_2">
+     <property name="geometry">
+      <rect>
+       <x>400</x>
+       <y>70</y>
+       <width>351</width>
+       <height>281</height>
+      </rect>
+     </property>
+    </widget>
    </widget>
    <widget class="QGroupBox" name="groupBox">
     <property name="geometry">
@@ -344,6 +364,13 @@
    </property>
   </action>
  </widget>
+ <customwidgets>
+  <customwidget>
+   <class>QChartView</class>
+   <extends>QGraphicsView</extends>
+   <header>QtCharts</header>
+  </customwidget>
+ </customwidgets>
  <resources/>
  <connections/>
 </ui>
