@@ -105,6 +105,8 @@ void NPPS::execute(unsigned tick_p, unsigned quantum_p = 0)
             cpu.assign_process(this->pop());
         }
 
+        this->sendData(cpu.is_free(), cpu.num_ticks);
+
         STATES state = cpu.processing();
 
         if (state == STATES::BLOCKED)
@@ -119,7 +121,5 @@ void NPPS::execute(unsigned tick_p, unsigned quantum_p = 0)
             }
         }
 
-        this->sendData(cpu.is_free(), cpu.num_ticks);
-       
     }
 }

@@ -36,12 +36,12 @@ void Process::generate_block_point()
     if(burst_time > 2)
     {
         
-        int probability = generateRandomNum(0, 3);
+        int probability = generateRandomNum(0, 10);
         if (probability == 1)
         {
             //this->block_point = 4;
             this->block_point = generateRandomNum(1, burst_time-1);
-            this->io_burst_time = generateRandomNum(1, 10);
+            this->io_burst_time = generateRandomNum(5, 20);
         }
 
     }

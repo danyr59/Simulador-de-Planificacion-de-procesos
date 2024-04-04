@@ -96,13 +96,15 @@ public:
         }
         std::cout << "========================" << std::endl;
 
-        ++fstats.total_tick;
+        if(!final)
+        {
+            ++fstats.total_tick;
 
-        if(cpu_free)
-            ++fstats.total_free;
-        else
-            ++fstats.total_occupied;
-
+            if(cpu_free)
+                ++fstats.total_free;
+            else
+                ++fstats.total_occupied;
+        }
         stats.final = final;
         if(final)
             stats.finals = this->fstats;

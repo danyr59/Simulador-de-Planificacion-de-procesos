@@ -89,7 +89,7 @@ void PS::execute(unsigned tick_p, unsigned quantum_p = 0)
 
     while (true)
     {
-     
+
         while (p_index < num_process && process_list[p_index]->status != STATES::DONE && process_list[p_index]->arrival_time == cpu.num_ticks)
         {
                  this->push(process_list[p_index]);
@@ -115,6 +115,8 @@ void PS::execute(unsigned tick_p, unsigned quantum_p = 0)
             cpu.assign_process(this->pop(current_burst_time_limit));
         }
 
+        this->sendData(cpu.is_free(), cpu.num_ticks);
+
         STATES state = cpu.processing();
 
         if(!cpu.is_free())
@@ -131,8 +133,11 @@ void PS::execute(unsigned tick_p, unsigned quantum_p = 0)
         }else if (state == STATES::DONE)
         {
             if (is_done())
+            {
+                this->sendData(cpu.is_free(), cpu.num_ticks, true);
                 break;
+            }
+
         }
-       
     }
 }

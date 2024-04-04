@@ -14,6 +14,7 @@
 #include <QtCharts/QBarSeries>
 #include <QtCharts/QBarSet>
 #include <QtCharts/QValueAxis>
+#include <QtCharts/QBarCategoryAxis>
 
 #include "utils.h"
 #include "controller.h"
@@ -52,6 +53,10 @@ private:
     QStandardItemModel *model_ready;
     QStandardItemModel *model_bloqued;
     QStandardItemModel *model_done;
+    QBarSeries *barseries;
+    QPieSeries *pieseries;
+    QValueAxis *axisY;
+
     //funtions
     void Message(QString);
     void iniciar_modelos();
