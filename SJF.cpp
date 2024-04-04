@@ -21,7 +21,7 @@ SJF::SJF()
 
 void SJF::execute(unsigned tick_p, unsigned quantum_p = 0)
 {
-    Cpu cpu(2, 0);
+    Cpu cpu(tick_p, quantum_p);
 
     /*
      */
@@ -34,6 +34,7 @@ void SJF::execute(unsigned tick_p, unsigned quantum_p = 0)
 
             if (cpu.num_ticks == process->arrival_time)
             {
+                process->status = STATES::READY;
                 process_queue.push(process);
 
             }
@@ -71,7 +72,10 @@ void SJF::execute(unsigned tick_p, unsigned quantum_p = 0)
         else if (state == STATES::DONE)
         {
             if (is_done())
+            {
+                this->sendData(cpu.is_free(), cpu.num_ticks, true);
                 break;
+            }
         }
         sendData(cpu.is_free(), cpu.num_ticks);
 

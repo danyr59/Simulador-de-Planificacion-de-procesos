@@ -38,6 +38,7 @@ void RR::execute(unsigned tick_p, unsigned quantum_p = 0)
 
             if (cpu.num_ticks == p->arrival_time)
             {
+                p->status = STATES::READY;
                 process_queue.push(p);
 
             }
@@ -85,7 +86,10 @@ void RR::execute(unsigned tick_p, unsigned quantum_p = 0)
         else if (state == STATES::DONE)
         {
             if (is_done())
+            {
+                this->sendData(cpu.is_free(), cpu.num_ticks, true);
                 break;
+            }
             // para metricas mostrar el current(variable local)
             // ya que el cpu en este momento no apunta a nada
         }
