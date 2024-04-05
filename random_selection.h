@@ -8,12 +8,12 @@
 
 class RandomSelection {
 private:
-    std::vector<sProcess> process_list; // Lista de todos los procesos
+    //std::vector<sProcess> process_list; // Lista de todos los procesos
     std::vector<sProcess> blocked_process_queue; // Cola de procesos bloqueados
 
 public:
     RandomSelection(int num_process);
-    void execute(unsigned , unsigned );
+    void execute(unsigned , unsigned ) override;
     bool is_done();
 };
 
