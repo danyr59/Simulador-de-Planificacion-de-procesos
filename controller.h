@@ -8,6 +8,7 @@
 #include "ps.h"
 #include "RR.h"
 #include "utils.h"
+#include "SRTF.h"
 
 class Controller : public QThread 
 {
