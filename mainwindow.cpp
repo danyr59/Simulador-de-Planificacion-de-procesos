@@ -20,6 +20,8 @@ MainWindow::MainWindow(QWidget *parent)
     ui->chart_view->chart()->setTitle("Uso del CPU");
     axisY = new QValueAxis(this);
     ui->chart_view_2->chart()->setTitle("Tiempo promedio");
+    ui->tick_number->setMaximum(10000);
+    ui->tick_number->setValue(500);
 
    // showMaximized();
 }

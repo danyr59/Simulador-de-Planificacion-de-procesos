@@ -30,7 +30,7 @@
    <widget class="QWidget" name="layoutWidget">
     <property name="geometry">
      <rect>
-      <x>830</x>
+      <x>860</x>
       <y>20</y>
       <width>91</width>
       <height>58</height>
@@ -54,7 +54,7 @@
      <rect>
       <x>700</x>
       <y>20</y>
-      <width>101</width>
+      <width>130</width>
       <height>58</height>
      </rect>
     </property>
@@ -62,7 +62,7 @@
      <item>
       <widget class="QLabel" name="label">
        <property name="text">
-        <string>Tick by second</string>
+        <string>Tick en milisegundos</string>
        </property>
       </widget>
      </item>

@@ -32,12 +32,10 @@ std::unique_ptr<Base> Controller::instanceAlgotithm(ALGORITMO a){
 
         break;
     case ALGORITMO::SRTF:
-        algorithm = std::make_unique<PS>(this->quantity_process);
-
+        algorithm = std::make_unique<Fcfs>(4);
         break;
     case ALGORITMO::PBEPE:
-        algorithm = std::make_unique<Fcfs>(4);
-
+        algorithm = std::make_unique<PS>(this->quantity_process);
         break;
     default:
         break;

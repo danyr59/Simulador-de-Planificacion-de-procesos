@@ -83,7 +83,7 @@ sProcess PS::pop(ushort &cbtl)
 
 void PS::execute(unsigned tick_p, unsigned quantum_p = 0)
 {
-    Cpu cpu(2, 0);
+    Cpu cpu(tick_p, 0);
     int p_index = 0;
     ushort current_burst_time_limit = 0;
 

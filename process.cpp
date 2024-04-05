@@ -2,7 +2,7 @@
 
 Process::Process(unsigned _pid, unsigned _arrival_time)
 {
-    this->burst_time = generateRandomNum(1, 30);
+    this->burst_time = generateRandomNum(5, 40);
     this->io_burst_time = 0;
     this->priority = generateRandomNum(1, 40);
     this->pid = _pid;
