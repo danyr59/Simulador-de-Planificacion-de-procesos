@@ -8,7 +8,7 @@ RR::RR()
     process_list.push_back(std::make_shared<Process>(Process(4, 5, 5)));
     process_list.push_back(std::make_shared<Process>(Process(5, 4, 3)));
 
-    process_list.push_back(std::make_shared<Process>(Process(6, 50, 10)));
+   // process_list.push_back(std::make_shared<Process>(Process(6, 50, 10)));
 
     // ordenar procesos por tiempo de llegada
     std::sort(process_list.begin(), process_list.end(), [&](sProcess a, sProcess b)
@@ -17,6 +17,7 @@ RR::RR()
 
 RR::RR(unsigned num_procesos) : Base(num_procesos)
 {
+
     std::sort(process_list.begin(), process_list.end(), [&](sProcess a, sProcess b)
               { return a->arrival_time < b->arrival_time; });
 }
@@ -24,7 +25,7 @@ RR::RR(unsigned num_procesos) : Base(num_procesos)
 void RR::execute(unsigned tick_p, unsigned quantum_p = 0)
 {
 
-    Cpu cpu(1, 2);
+    Cpu cpu(tick_p, quantum_p);
     unsigned time = 0;
     bool add_process_interrup = false;
 
@@ -76,6 +77,8 @@ void RR::execute(unsigned tick_p, unsigned quantum_p = 0)
             if (cpu.assign_process(process_queue.front()))
                 process_queue.pop();
         }
+        sendData(cpu.is_free(), cpu.num_ticks +1);
+
         auto current = cpu.getCurrentProcess();
         STATES state = cpu.processing();
 
@@ -107,7 +110,6 @@ void RR::execute(unsigned tick_p, unsigned quantum_p = 0)
                 ++time;
             }
         }
-        sendData(cpu.is_free(), cpu.num_ticks);
 
 
     }
