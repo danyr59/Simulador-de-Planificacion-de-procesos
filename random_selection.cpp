@@ -18,12 +18,34 @@ void RandomSelection::execute(unsigned tick_p, unsigned quantum_p = 0) {
     Cpu cpu(tick_p, quantum_p);
 
     while (!is_done()) {
+
+        for (auto p : process_list)
+        {
+            if (p->status == STATES::DONE)
+                continue;
+
+            if (cpu.num_ticks == p->arrival_time)
+            {
+                p->status = STATES::READY;
+                process_queue.push(p);
+
+            }
+
+        }
+
+
         // Actualizar el estado de E/S de los procesos bloqueados
-        for (auto& p : blocked_process_queue) {
+        for(int i = 0 ; i < blocked_process_queue.size(); i++)
+        {
+            sProcess p = blocked_process_queue[i];
+
             p->io();
             if (p->io_burst_time == 0) {
                 p->status = STATES::READY;
-                process_list.push_back(p);
+                process_queue.push(p);
+                blocked_process_queue.erase(blocked_process_queue.begin()+i);
+               // blocked_process_queue.pop_back();
+                //process_list.push_back(p);
                // std::cout << "Proceso " << p->pid << " desbloqueado y movido a la cola de procesos listos." << std::endl;
             }
         }
@@ -38,11 +60,12 @@ void RandomSelection::execute(unsigned tick_p, unsigned quantum_p = 0) {
         }
 
         // Seleccionar un proceso aleatorio de la lista de procesos listos y asignarlo a la CPU
-        if (cpu.is_free() && !process_list.empty()) {
-            std::shuffle(process_list.begin(), process_list.end(), std::default_random_engine(generateRandomNum(0, process_list.size() - 1)));
-            auto selected_process = process_list.front();
-            process_list.erase(process_list.begin());
-            if (cpu.assign_process(selected_process)) {
+        if (cpu.is_free() && !process_queue.empty()) {
+            //std::shuffle(process_list.begin(), process_list.end(), std::default_random_engine(generateRandomNum(0, process_list.size() - 1)));
+            //auto selected_process = process_list.front();
+            //process_list.erase(process_list.begin());
+            if (cpu.assign_process(process_queue.front())) {
+
                 //std::cout << "Proceso " << selected_process->pid << " asignado a la CPU." << std::endl;
             }
         }
