@@ -36,6 +36,8 @@ set(PROJECT_SOURCES
         process.h
         utils.h
         utils.cpp
+        SRTF.cpp
+        SRTF.h
 
 
 )

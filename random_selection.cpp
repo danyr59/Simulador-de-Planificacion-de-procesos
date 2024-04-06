@@ -1,11 +1,7 @@
 #include "random_selection.h"
 
-RandomSelection::RandomSelection(int num_process) {
+RandomSelection::RandomSelection(int num_process) : Base(num_process) {
     // Inicializar procesos
-    process_list.push_back(std::make_shared<Process>(Process(1, 0, 5)));
-    process_list.push_back(std::make_shared<Process>(Process(2, 2, 3)));
-    process_list.push_back(std::make_shared<Process>(Process(3, 4, 4)));
-    process_list.push_back(std::make_shared<Process>(Process(4, 6, 2)));
 
 }
 
@@ -19,7 +15,7 @@ bool RandomSelection::is_done() {
 
 void RandomSelection::execute(unsigned tick_p, unsigned quantum_p = 0) {
 
-    Cpu cpu(2, 0);
+    Cpu cpu(tick_p, quantum_p);
 
     while (!is_done()) {
         // Actualizar el estado de E/S de los procesos bloqueados
@@ -59,7 +55,9 @@ void RandomSelection::execute(unsigned tick_p, unsigned quantum_p = 0) {
             //std::cout << "Proceso " << interrupted_process->pid << " interrumpido y movido a la cola de procesos bloqueados." << std::endl;
         }
 
+        sendData(cpu.is_free(), cpu.num_ticks);
         //std::cout << "Simulando paso del tiempo..." << std::endl;
         std::cout << 5 << std::endl;
     }
+    sendData(cpu.is_free(), cpu.num_ticks, true);
 }

@@ -58,6 +58,7 @@ std::priority_queue<sProcess, std::vector<sProcess>, decltype(comp)> readyQueue(
            // std::cout << "Proceso bloqueado: ID " << cpu.interrupt()->pid << std::endl;
         } else if (state == STATES::DONE) {
             if (is_done()) {
+                sendData(cpu.is_free(), cpu.num_ticks,true);
                 break;
             }
         }
