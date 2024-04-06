@@ -9,7 +9,7 @@ void SRTF::execute(unsigned tick, unsigned quantum) {
    
 auto comp = [&](sProcess a, sProcess b) { return a->burst_time > b->burst_time; };
 std::priority_queue<sProcess, std::vector<sProcess>, decltype(comp)> readyQueue(comp);
-int contador = 0;
+
     while (!is_done()) {
         // Colocar procesos en la cola de listos si son elegibles para ejecución
         for (auto process : process_list) {
@@ -33,25 +33,25 @@ int contador = 0;
             }
         }
 
+        if((!readyQueue.empty() && !cpu.is_free()) && (cpu.getCurrentProcess()->burst_time > readyQueue.top()->burst_time))
+        {
+            readyQueue.push(cpu.interrupt());
+        }
+
         // Asignar procesos a la CPU si está libre
          if (cpu.is_free() && !readyQueue.empty()) {
             auto top_process = readyQueue.top();
             readyQueue.pop();
             if (cpu.assign_process(top_process)) {
-                contador = 0;
+
          //       std::cout << "Proceso asignado a la CPU: ID " << top_process->pid << ", Ráfaga de CPU " << top_process->burst_time << std::endl;
             }
         }
 
         // Procesar el estado de la CPU
         STATES state = cpu.processing();
-        ++contador;
-        sendData(cpu.is_free(), cpu.num_ticks);
 
-        if(contador >= cpu.getQuantum())
-        {
-            readyQueue.push(cpu.interrupt());
-        }
+        sendData(cpu.is_free(), cpu.num_ticks);
 
         if (state == STATES::BLOCKED) {
             bloqued_process_queue.push(cpu.interrupt());
