@@ -9,22 +9,13 @@ void SRTF::execute(unsigned tick, unsigned quantum) {
    
 auto comp = [&](sProcess a, sProcess b) { return a->burst_time > b->burst_time; };
 std::priority_queue<sProcess, std::vector<sProcess>, decltype(comp)> readyQueue(comp);
-
+int contador = 0;
     while (!is_done()) {
         // Colocar procesos en la cola de listos si son elegibles para ejecución
         for (auto process : process_list) {
-            if (process->status == STATES::READY) {
-                if (cpu.num_ticks >= process->arrival_time && 
-                    (!cpu.getCurrentProcess() || process->burst_time < cpu.getCurrentProcess()->burst_time)) {
-                    if (!cpu.is_free()) {
-                        auto interrupted_process = cpu.interrupt();
-                        interrupted_process->status = STATES::READY;
-                        readyQueue.push(interrupted_process);
-                   //     std::cout << "Proceso interrumpido: ID " << interrupted_process->pid << std::endl;
-                    }
-                    readyQueue.push(process);
-                 //   std::cout << "Proceso encolado: ID " << process->pid << ", Tiempo de llegada " << process->arrival_time << std::endl;
-                }
+            if (process->status == STATES::NONE && cpu.num_ticks == process->arrival_time) {
+                process->status = STATES::READY;
+                readyQueue.push(process);
             }
         }
 
@@ -36,6 +27,7 @@ std::priority_queue<sProcess, std::vector<sProcess>, decltype(comp)> readyQueue(
 
             if (bloqued_process_queue.front()->io_burst_time == 0) {
                 bloqued_process_queue.front()->generate_block_point();
+                bloqued_process_queue.front()->status = STATES::READY;
                 readyQueue.push(bloqued_process_queue.front());
                 bloqued_process_queue.pop();
             }
@@ -46,12 +38,20 @@ std::priority_queue<sProcess, std::vector<sProcess>, decltype(comp)> readyQueue(
             auto top_process = readyQueue.top();
             readyQueue.pop();
             if (cpu.assign_process(top_process)) {
+                contador = 0;
          //       std::cout << "Proceso asignado a la CPU: ID " << top_process->pid << ", Ráfaga de CPU " << top_process->burst_time << std::endl;
             }
         }
 
         // Procesar el estado de la CPU
         STATES state = cpu.processing();
+        ++contador;
+        sendData(cpu.is_free(), cpu.num_ticks);
+
+        if(contador >= cpu.getQuantum())
+        {
+            readyQueue.push(cpu.interrupt());
+        }
 
         if (state == STATES::BLOCKED) {
             bloqued_process_queue.push(cpu.interrupt());
@@ -64,6 +64,6 @@ std::priority_queue<sProcess, std::vector<sProcess>, decltype(comp)> readyQueue(
         }
 
         // Enviar datos para seguimiento y estadísticas
-        sendData(cpu.is_free(), cpu.num_ticks);
+
     }
 }
