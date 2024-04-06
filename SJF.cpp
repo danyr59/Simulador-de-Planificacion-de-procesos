@@ -63,6 +63,7 @@ void SJF::execute(unsigned tick_p, unsigned quantum_p = 0)
                 process_queue.pop();
         }
 
+        sendData(cpu.is_free(), cpu.num_ticks);
         STATES state = cpu.processing();
 
         if (state == STATES::BLOCKED)
@@ -77,7 +78,7 @@ void SJF::execute(unsigned tick_p, unsigned quantum_p = 0)
                 break;
             }
         }
-        sendData(cpu.is_free(), cpu.num_ticks);
+
 
     }
 

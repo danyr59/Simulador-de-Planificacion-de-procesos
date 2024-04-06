@@ -16,7 +16,7 @@ std::unique_ptr<Base> Controller::instanceAlgotithm(ALGORITMO a){
 
         break;
     case ALGORITMO::SJF:
-        algorithm = std::make_unique<SJF>(4);
+        algorithm = std::make_unique<SJF>(this->quantity_process);
 
         break;
     case ALGORITMO::SA:
