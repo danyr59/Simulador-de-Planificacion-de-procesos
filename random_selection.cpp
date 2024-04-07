@@ -1,9 +1,27 @@
+/**
+ * @file random_selection.cpp
+ * @brief Implementacion de la clase RandomSelection
+ *
+ * Define las funciones miembro para la clase RandomSelection, que implementa
+ * el algoritmo de seleccion aleatoria de procesos para su ejecucion
+ */
 #include "random_selection.h"
+
+/**
+ * @brief Constructor de la clase RandomSelection.
+ * Inicializa la clase base con el numero de procesos especificado.
+ * @param num_process Numero de procesos a inicializar.
+ */
 
 RandomSelection::RandomSelection(int num_process) : Base(num_process) {
     // Inicializar procesos
 
 }
+
+/**
+ * @brief Verifica si todos los procesos han terminado su ejecucion.
+ * @return Verdadero si todos los procesos estan en el estado DONE, falso de lo contrario.
+ */
 
 bool RandomSelection::is_done() {
     for (auto p : process_list) {
@@ -13,14 +31,22 @@ bool RandomSelection::is_done() {
     return true;
 }
 
+/**
+ * @brief Ejecuta el algoritmo de seleccion aleatoria.
+ * Asigna procesos de manera aleatoria a la CPU para su ejecucion y maneja los procesos bloqueados.
+ * @param tick_p Unidad de tiempo que representa un tick del procesador.
+ * @param quantum_p No se utiliza en este algoritmo, pero se incluye para mantener la firma del metodo.
+ */
+
 void RandomSelection::execute(unsigned tick_p, unsigned quantum_p = 0) {
 
     Cpu cpu(tick_p, quantum_p);
 
     std::vector<sProcess> ready_list;
-
+    
+    // Bucle principal de ejecucion del algoritmo
     while (!is_done()) {
-
+     // Añadir procesos a la lista de listos segun su tiempo de llegada
         for (auto p : process_list)
         {
             if (p->status == STATES::DONE)
@@ -35,7 +61,6 @@ void RandomSelection::execute(unsigned tick_p, unsigned quantum_p = 0) {
 
         }
 
-
         // Actualizar el estado de E/S de los procesos bloqueados
         for(int i = 0 ; i < blocked_process_queue.size(); i++)
         {
@@ -46,20 +71,8 @@ void RandomSelection::execute(unsigned tick_p, unsigned quantum_p = 0) {
                 p->status = STATES::READY;
                 ready_list.push_back(p);
                 blocked_process_queue.erase(blocked_process_queue.begin()+i);
-               // blocked_process_queue.pop_back();
-                //process_list.push_back(p);
-               // std::cout << "Proceso " << p->pid << " desbloqueado y movido a la cola de procesos listos." << std::endl;
             }
         }
-
-        // Eliminar procesos bloqueados que estén listos para ser desbloqueados
-        //for (auto it = blocked_process_queue.begin(); it != blocked_process_queue.end(); ) {
-        //    if ((*it)->status == STATES::READY) {
-        //        it = blocked_process_queue.erase(it);
-        //    } else {
-        //        ++it;
-        //    }
-        //}
 
         // Seleccionar un proceso aleatorio de la lista de procesos listos y asignarlo a la CPU
         if (cpu.is_free() && !ready_list.empty()) {
@@ -67,23 +80,16 @@ void RandomSelection::execute(unsigned tick_p, unsigned quantum_p = 0) {
             auto selected_process = ready_list.front();
             ready_list.erase(ready_list.begin());
             cpu.assign_process(selected_process);
-            //if (cpu.assign_process(process_queue.front())) {
-
-                //std::cout << "Proceso " << selected_process->pid << " asignado a la CPU." << std::endl;
-            //}
         }
 
-        // Procesar la CPU
+        // Procesar la CPU y manejar los estados de los procesos
         STATES state = cpu.processing();
         if (state == STATES::BLOCKED) {
             auto interrupted_process = cpu.interrupt();
             blocked_process_queue.push_back(interrupted_process);
-            //std::cout << "Proceso " << interrupted_process->pid << " interrumpido y movido a la cola de procesos bloqueados." << std::endl;
         }
-
+        // Enviar datos para seguimiento y estadisticas
         sendData(cpu.is_free(), cpu.num_ticks);
-        //std::cout << "Simulando paso del tiempo..." << std::endl;
-        std::cout << 5 << std::endl;
     }
     sendData(cpu.is_free(), cpu.num_ticks, true);
 }
