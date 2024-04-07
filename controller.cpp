@@ -45,17 +45,16 @@ std::unique_ptr<Base> Controller::instanceAlgotithm(ALGORITMO a){
 
 void Controller::run()
 {
+    //instanciar algoritmo
     std::unique_ptr<Base> base = instanceAlgotithm(this->algorithm);
 
-
-    //ejecuccion de cada algoritmo
-    //obtener metricas
-    //exponer metricas
-    //emit datosListos("dato");
-    //Fcfs fcfs(4);
+    //vinculacion de la señal datosListos con el metodo sendData
+    //hecho a través de una funcion lambda
     base->bind([this] (Stats data) {
         emit this->datosListos(data);
     });
+
+    //ejecutar el algoritmo
     base->execute(this->tick, this->quantum);
     
 
