@@ -1,39 +1,10 @@
-//#ifndef SRTF_H
-/*#define SRTF_H
-
-#include "process.h"
-#include "cpu.h"
-#include <queue>
-#include <memory>
-#include "base.h"
-#include <algorithm>
-
-class SRTF: public Base {
-
-private:
-    struct Compare
-    {
-        bool operator()(const sProcess &a, const sProcess &b)
-        {
-            return a->burst_time > b->burst_time;
-        }
-    };
-
-public:
-    SRTF(int num_process);
-   // void addProcess(sProcess p);
-    void execute(unsigned ,unsigned ) override;
-
-private:
-   // std::priority_queue<std::shared_ptr<Process>, std::vector<std::shared_ptr<Process>>, Compare> readyQueue;
-    std::priority_queue<sProcess, std::vector<sProcess>, Compare> readyQueue;    
-   // std::queue<std::shared_ptr<Process>> blockedProcessQueue;
-    std::queue<sProcess> blockedProcessQueue;
-
-};
-
-#endif // SRTF_H
-*/
+/**
+ * @file SRTF.h
+ * @brief Clase que implementa el algoritmo de planificacion de procesos Shortest Remaining Time First (SRTF).
+ *
+ * Esta clase hereda de la clase Base y sobrescribe el metodo execute para implementar
+ * la planificacion de procesos basada en el tiempo restante mas corto.
+ */
 #ifndef __SRTF__
 #define __SRTF__
 
@@ -41,11 +12,36 @@ private:
 #include "process.h"
 #include <queue>
 
+/**
+ * @class SRTF
+ * @brief Implementa el algoritmo de planificacion de procesos Shortest Remaining Time First (SRTF).
+ *
+ * En este algoritmo, los procesos son seleccionados para ejecucion basandose en el tiempo de rafaga restante mas corto.
+ * Si un proceso con un tiempo de rafaga mas corto llega mientras otro proceso esta en ejecucion, el proceso actual
+ * sera interrumpido y el nuevo proceso tomara su lugar.
+ */
+
 class SRTF : public Base {
 public:
+    /**
+     * @brief Constructor por defecto de la clase SRTF.
+     */
     SRTF();
+    /**
+     * @brief Constructor de la clase SRTF con numero de procesos.
+     * @param num_process Numero de procesos para inicializar la cola de procesos listos.
+     */
     SRTF(unsigned num_process);
+    /**
+     * @brief Metodo para ejecutar el algoritmo SRTF.
+     * @param tick Unidad de tiempo que representa un tick del procesador.
+     * @param quantum No se utiliza en este algoritmo, pero se incluye para mantener la firma del metodo.
+     */
     void execute(unsigned tick, unsigned quantum = 0) override;
+
+     /**
+     * @brief Cola de procesos bloqueados esperando por recursos o eventos externos.
+     */
     std::queue<sProcess> bloqued_process_queue;
 
 };
