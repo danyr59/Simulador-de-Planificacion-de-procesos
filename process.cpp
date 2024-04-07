@@ -2,21 +2,27 @@
 
 Process::Process(unsigned _pid, unsigned _arrival_time)
 {
+    // Genera valores aleatorios para burst_time
     this->burst_time = generateRandomNum(5, 40);
     this->io_burst_time = 0;
+    // Genera valores aleatorios para priority
     this->priority = generateRandomNum(1, 40);
     this->pid = _pid;
     this->arrival_time = _arrival_time;
+    // Genera el punto de bloqueo y marca el estado del proceso como NONE
     generate_block_point();
     this->status = STATES::NONE;
 }
 Process::Process(unsigned _pid, unsigned _arrival_time, unsigned _burst_time)
 {
+
     this->burst_time = _burst_time;
+    // Genera valores aleatorios para priority
     this->priority = generateRandomNum(1, 40);
     this->io_burst_time = 0;
     this->pid = _pid;
     this->arrival_time = _arrival_time;
+    // Genera el punto de bloqueo y marca el estado del proceso como NONE
     generate_block_point();
     this->status = STATES::NONE;
 }
